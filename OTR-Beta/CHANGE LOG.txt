@@ -1,0 +1,155 @@
+EVENTS CHANGELOG
+-Removed window (unit 101) from unittypestobedeletedeachturn
+-Left it in unitTypesWhichCanBeDestroyedWithoutMovementReduction but I think this might be dead end code as I can't find a reference to it anywhere else in the document?  I couldn't figure out what this did, so I didn't change it.
+-Added unitAliases.GermanTaskForce and unitAliases.AlliedTaskForce in place of heavy cruiser and battleship
+-Added these to strat targets list as well, so they too can't be protected by air cover
+-Allowed these units to react to all aircraft but jets 2x on the low map at a range of 2 tiles
+-Searched for and removed all reference to both in the rest of the events file.  Generally replaced name, but deleted entirely from convoy generation mechanism as that is changing.
+-Added unitAliases.Barrage = civ.getUnitType(114) -- this is the ammo for battle groups and task forces
+-Added same to unittypetobedeleted
+-Removed most references of Schutzen but did not do that to freight train mechanism
+-Replaced old names with GermanArmyGroup, GermanBatteredArmyGroup, AlliedArmyGroup, AlliedBatteredArmyGroup, and RedArmyGroup to fields that required them aside from freight train mechanism
+-Searched for and removed all references to RedArmy, AlliedInfantry, and AlliedTanks
+-Added all five Army Group units to the ranged attack units - a ranged artillery barrage will remove all of their MP each turn.
+-Added reference to Torpedo (110) as munition for U-Boat, made it so that it no longer native transports
+-There were still references to the old defensive fire mechanism in several places.  I "--" them.
+-Added payload to all bombs/rockets fired.  Regular guns are not payload munitions.
+-Fixed bug where German strategic bombers would not defend themselves against Allied fighters
+-Naval units can now be attacked by naval bombers (Fw200, Sunderland).  These units can do *significant* damage even to Task Forces.  
+-Fixed bug where Germans were getting the D-Day warning every turn
+-Allies will now start receiving 10 additional 15th Air Force bombers every 200 points starting at 400 points.
+
+FROM YOUR LIST (pleast turn to Green):
+-Make Army Groups 'k' units that can fire munitions but expend all of their MP doing so. -- DONE
+-Make submarines a 'k' unit with torpedos. Make sunderlands reactively attack them when they call up ammo. -- DONE
+-Add in Prof. Garfield's idea for Allies having to press 'H' to load up bombers, and 'k' expending the munition. While it will make the form up a bit more time consuming I think it will be well worth it. I don't think we should do this for fighters as much of what differentiates the types is how many times they can press 'k' per turn. -- DONE (Payload is updated)
+-Make convoys and army groups "strategic targets" and thus ineligible for air cover. -- DONE
+-Veteran units generate veteran munitions. -- DONE
+-Add in events where after a certain threshold of points, the Mediterranean receives reinforcements more regularly to keep this a viable threat/thorn.  -- DONE
+
+NEEDS TO BE ADDED TO YOUR LIST:
+-If a unit is killed or wounded by a 250, 500 or 1000lb bomb on the night map, it needs to be replaced at full health and vet status preserved if it was a vet (to prevent bombers from unrealistically bombing airfields at night).
+
+
+5/19/19 CHANGELOG
+-Tweaked the lowAltNoAttack - kept this phrasing for primary attack (bombers) but changed it to highAltNoAttack for secondary attacks.  In my playtest I sometimes used fighter bombers to go after strategic targets and they won't be able to do this (at least with their bombs) any more.
+-Added lowAltNoAttack to all strategic bombers
+-I decided to keep the extra 4MP for the P-47s after secondary attack, and increased it to half their MP.  Now that these are payload, there isn't a need to reduce MP to 1 after an attack and there can be a bit more reason to using these (they can get a few tiles away--specifically, out of the 4-space reactive range of flak.  Now, Fighter-Bombers can swoop in and get out without the entire squadron being targeted by each successive attack).
+-I reduced the type of payload carried by the P-47s to max of 500lb bombs 
+-I increased the quantity of several aircraft now that we have the payload system.  They'll unleash their full payload in one strike (the mission).  
+-"True" fighter-bombers (Hurricane, Typhoon, Tempest, Fw190F8, Do335) now carry 2x 1,000lb bombs to make them more worthwhile.  These are now the only units that carry 1,000lb bombs (plus Stuka).
+-1,000lb bomb power dramatically increased - this is now the main aerial weapon for attacking flak installations.  Since the units that carry them have limited range, things ought to balance.
+-Allied "True" fighter-bombers range decreased to compensate - left Germans higher so they can have a few advantages too
+-Increased range of Stuka to give there a purpose to using it.  It's defense of 2 makes it highly-vulnerable to attack, but it can now reach the Bristol Channel from Vannes AFB.  Given that it carries a 1,000lb bomb, a few of them should be able to destroy a convoy
+-"True" fighter-bombers have MP cost reduced to 1 for secondary - they can get out of dodge after attacking. 
+-Given that we've removed so many of the low alt targets, I'm struggling with a purpose for tactical bombers.  I'm now going to consider them "medium bombers" and allow them to operate at high altitude.  They'll move faster than the strategic bombers, but only have a range of 2.  They'll be able to attack at high or low alt.  The A26 will be able to attack some targets in the Ruhr, but they'll really come into their own after D-Day.  Their big advantage will be that they're the one type of bomb-carrier that can attack on any map.  Now, I feel they have a true purpose.
+-Tactical bombers now cost all MP to make a primary attack.  Now that strat bombers can't hit low alt targets, tactical bombers are what you use to do this, but they need an escort.  
+-Tactical bombers now all have 500lb bombs (strat bombers only carry 250lb bombs)
+-Added German light flak and Allied light flak to the list of units that bombs can kill on the night map.  This seemed like the best compromise option to make sure that the human couldn't just place 3.7cm flak or Bofors on a field and have it be completely invulnerable, but at the same time, heavy bombers can no longer be used to wipe out the fighters after the flak is killed.
+-Added 5 events where Allies will receive an additional Battle Group.  They will start with 1, and earn another every 225 points.  They can end the game with 6.  Their starting group will start very far north to protect it and the Allied player probably won't want to risk bringing it south until air superiority is achieved.
+-Likewise, added 4 events where Allies will receive an additional naval task force.  They'll start the scenario with four (two in the Atlantic, two guarding against the Kriegesmarine's one).  Thus, they can have a maximum of 8.
+-Increased German scores: killing convoy now grants 15 points.  Killing heavy bomber now grants 1 point.
+-Added 8 events where Germans will receive an additional Battle Group.  They will start with several and gain another one for every 150 points up to 1300 points.
+-Added 3 events where Germans will receive an additioanl naval task force.  They will start with 1.  They gain these every 400 points up to 1200 points.  They can have a maximum of 4.  
+-Edited out the Operation Overlord Event given that the Allies can now invade whenever they want (though with only one Battle Group to start, it would be pretty foolish to do this right away).
+-Added 4th ammo type - Hispanos - this is more powerful than heavy guns (frankly, hispanos were probably the best cannon of the war when you consider ballistics plus firepower).  Spitfires carry this.  The goal is to make them worth building.  They are by far the best aircraft the Allies have at attacking German fighters now, but their extremely limited range should balance this.  Considering the Allies don't get any A2A rockets, and probably won't build jets, this seems fair.  Granted, pretty much every British fighter in the game had this type of armament, but none were as good at dogfighting as the Spitfire, and it's not simply the bullet that is being considered here.  The Spitfire was truly feared by the Germans ever since they encountered it, and now it will be in this game as well (especially veteran squadrons).
+-Updated the "tab" help with new munitions logic/changes above.
+-Because I anticipate the Allies trying to get their bombers back home and because I wasn't really happy with the artificial need to not research better interceptors right away, I've decreased the threshold necessary to unlock the "Long Range Escort" tech from 60 to 30.  This tech doesn't give Mustangs, anyway - one must still research them.  I think I've made other aircraft useful enough (especially fighter bombers) that people might not beeline straight for the best escorts, anyway.
+-Renamed "Veteran" to "Ace" to make it more in line with this scenario.  This will be a little weird for the Battle Groups and Task Forces but those are so limited compared to the aircraft that I prefer to use Ace now.
+-Russian Front now opens at 1500 points.
+
+JPP 5/19 PM CHANGE LOG
+-Added Hispanos to the gun bonus section in the events
+-Tweaked number of bombs that tactical bombers drop
+
+JPP 5/21 AM CHANGE LOG
+-Added Carrier to list of units that can be killed in city if military port also destroyed
+-Changed cost of Wolfpacks to 900 shields
+-Decreased cost of gun battery slightly as it'll be less impervious to attack in future versions - down to 600 shields from 750
+-Made Army Groups and Task Forces non-disbandable 
+
+
+
+TO BE MOVED FROM ORANGE TO GREEN
+-Add in events where after a certain threshold of points, the Mediterranean receives reinforcements more regularly to keep this a viable threat/thorn. -- DONE
+-Implement event where strategic bombers cannot call up munitions on the low alt map. -- DONE
+
+TO BE MOVED FROM ORANGE TO YELLOW
+-Revisit radar in general. No more advanced radar unit, so let the old radar get better stats from the better tech level instead. I think this something changed entirely in tables
+-Reduce radar range slightly to compensate for bombers no longer being invisible until attack.
+**Until I need space for a new unit I don't see a need to do either of these things.  It seems like a lot of work for really no gain.  The system is currently working.  We can see if it matters that the range needs to be reduced.  I doubt it.
+
+TO BE MOVED FROM BLACK TO GREEN
+-Change the Russian Front event to require an additional 750 points beyond D-Day to trigger, rather than 250 (we agreed on 500 in the playtest but even that is pretty close behind. I really want to keep driving the use of strategic bombers).
+
+
+
+
+
+
+TO KEEP TRACK OF FOR CHANGELOG 3.2
+
+-Allied cities now also count as objectives.  The Germans can invade England if they are successful enough and win the war outright.
+-Barbarian "neutral territory" units removed from game - they would not sustain themselves in game so a house rule not to fly over neutral territory will be necessary instead.
+-The Beaufighter, Ju88C, Stirling, Halifax, and Lancaster are no longer invisible until attack, but have the sub flag instead.
+-Cloud cover defensive bonus increased from 3x to 6x.
+-Fixed a bug where cloud cover defensive bonus would not trigger if there was a special resource flag on the cloud.
+-Updated Readme to include reference to Fw190A8 having A2A rocket as secondary attack.
+-Freighter changed to "Convoy" - 6 attack and 20 defense.  3 HP and 2 FP, which is the same as most target units.  
+-Schutzen and Panzers changed to Army Group and Battered Army Group (German) respectively.
+-Allied Infantry and Allied Tanks changed to Army Group and Battered Army Group (Allies) respectively.  Red Army changed to Red Army Group.  Russians don't retreat, so there is no battered Russian Army Group.
+-Heavy shells replaced by artillery barrage - meant to soften up army groups.
+-Removed attacks per turn function.  There are few direct attack units in the game/on the map but they can now all attack as often as they have movement points.
+-U-Boat is now a k unit and cannot directly attack.  Instead, it fires torpedos which are as effective as 500lb bombs.
+-Changed map text to bring in line with current version.  Removed references to exact figures for points thresholds so that they can more easily be changed in the future if needed.  The readme will now explain how many points are necessary for what.
+-Removed window (unit 101) from unittypestobedeletedeachturn as I don't believe it was staying active for German players' turn, thus it wasn't working
+-Fixed bug where P-47D40 could not fly at high altitude
+-Aircraft now have a payload for any bombs or rockets that they carry.  They will require a home city to utilize these.
+-Fixed bug where German strategic bombers would not defend themselves against Allied fighters
+-Allies will now start receiving 10 additional 15th Air Force bombers every 200 points starting at 400 points.
+-Tweaked the lowAltNoAttack - kept this phrasing for primary attack (bombers) but changed it to highAltNoAttack for secondary attacks.  In my playtest I sometimes used fighter bombers to go after strategic targets and they won't be able to do this (at least with their bombs) any more.
+-Added lowAltNoAttack to all strategic bombers
+-I decided to keep the extra 4MP for the P-47s after secondary attack, and increased it to half their MP.  Now that these are payload, there isn't a need to reduce MP to 1 after an attack and there can be a bit more reason to using these (they can get a few tiles away--specifically, out of the 4-space reactive range of flak.  Now, Fighter-Bombers can swoop in and get out without the entire squadron being targeted by each successive attack).
+-I reduced the type of payload carried by the P-47s to max of 500lb bombs 
+-I increased the quantity of several aircraft now that we have the payload system.  They'll unleash their full payload in one strike (the mission).  
+-"True" fighter-bombers (Hurricane, Typhoon, Tempest, Fw190F8, Do335) now carry 2x 1,000lb bombs to make them more worthwhile.  These are now the only units that carry 1,000lb bombs (plus Stuka).
+-1,000lb bomb power dramatically increased - this is now the main aerial weapon for attacking flak installations.  Since the units that carry them have limited range, things ought to balance.
+-Allied "True" fighter-bombers range decreased to compensate - left Germans higher so they can have a few advantages too
+-Increased range of Stuka to give there a purpose to using it.  It's defense of 2 makes it highly-vulnerable to attack, but it can now reach the Bristol Channel from Vannes AFB.  Given that it carries a 1,000lb bomb, a few of them should be able to destroy a convoy
+-"True" fighter-bombers have MP cost reduced to 1 for secondary - they can get out of dodge after attacking. 
+-Given that we've removed so many of the low alt targets, I'm struggling with a purpose for tactical bombers.  I'm now going to consider them "medium bombers" and allow them to operate at high altitude.  They'll move faster than the strategic bombers, but only have a range of 2.  They'll be able to attack at high or low alt.  The A26 will be able to attack some targets in the Ruhr, but they'll really come into their own after D-Day.  Their big advantage will be that they're the one type of bomb-carrier that can attack on any map.  Now, I feel they have a true purpose.
+-Tactical bombers now cost all MP to make a primary attack.  Now that strat bombers can't hit low alt targets, tactical bombers are what you use to do this, but they need an escort.  
+-Tactical bombers now all have 500lb bombs (strat bombers only carry 250lb bombs)
+-Added German light flak and Allied light flak to the list of units that bombs can kill on the night map.  This seemed like the best compromise option to make sure that the human couldn't just place 3.7cm flak or Bofors on a field and have it be completely invulnerable, but at the same time, heavy bombers can no longer be used to wipe out the fighters after the flak is killed.
+-Added 5 events where Allies will receive an additional Battle Group.  They will start with 1, and earn another every 225 points.  They can end the game with 6.  Their starting group will start very far north to protect it and the Allied player probably won't want to risk bringing it south until air superiority is achieved.
+-Likewise, added 4 events where Allies will receive an additional naval task force.  They'll start the scenario with four (two in the Atlantic, two guarding against the Kriegesmarine's one).  Thus, they can have a maximum of 8.
+-Increased German scores: killing convoy now grants 15 points.  Killing heavy bomber now grants 1 point.
+-Added 8 events where Germans will receive an additional Battle Group.  They will start with several and gain another one for every 150 points up to 1300 points.
+-Added 3 events where Germans will receive an additioanl naval task force.  They will start with 1.  They gain these every 400 points up to 1200 points.  They can have a maximum of 4.  
+-Edited out the Operation Overlord Event given that the Allies can now invade whenever they want (though with only one Battle Group to start, it would be pretty foolish to do this right away).
+-Added 4th ammo type - Hispanos - this is more powerful than heavy guns (frankly, hispanos were probably the best cannon of the war when you consider ballistics plus firepower).  Spitfires carry this.  The goal is to make them worth building.  They are by far the best aircraft the Allies have at attacking German fighters now, but their extremely limited range should balance this.  Considering the Allies don't get any A2A rockets, and probably won't build jets, this seems fair.  Granted, pretty much every British fighter in the game had this type of armament, but none were as good at dogfighting as the Spitfire, and it's not simply the bullet that is being considered here.  The Spitfire was truly feared by the Germans ever since they encountered it, and now it will be in this game as well (especially veteran squadrons).
+-Updated the "tab" help with new munitions logic/changes above.
+-Because I anticipate the Allies trying to get their bombers back home and because I wasn't really happy with the artificial need to not research better interceptors right away, I've decreased the threshold necessary to unlock the "Long Range Escort" tech from 60 to 30.  This tech doesn't give Mustangs, anyway - one must still research them.  I think I've made other aircraft useful enough (especially fighter bombers) that people might not beeline straight for the best escorts, anyway.
+-Renamed "Veteran" to "Ace" to make it more in line with this scenario.  This will be a little weird for the Battle Groups and Task Forces but those are so limited compared to the aircraft that I prefer to use Ace now.
+-Russian Front now opens at 1500 points.
+-Added restriction so that industry/aircraftFactory/Refinery require an appropriate number of civilian population improvements.
+-In the artilleryUnit and secondaryAttackUnit tables, if lowAltNoAttack=true, the unit can't use that attack at low altitude. Absent (and false) means it can make the attack.
+-Munition users can now gain veteran status. When a munition (a unit with the destroyed after attacking flag) defeats another unit, the game checks for the most recent munition user (which is stored via id number in the state table). If that munition user is close enough to the place where the munition made its kill (a bomber must be on the square where the munition attacked from, a flak battery must be adjacent to the tile the flak attacked from) there is a chance that the unit will gain veteran status. Veteran munitions won't grant veteran status, so this system can't be abused by having veterans gain the status for the rookie.  Also, the system checks that the unit that will gain veteran status could actually have used the munition in question.  specialNumbers.munitionVeteranChance = 0.5 -- chance of vet status if a unit's munition kills an enemy.
+-On the night map, 250lb,500lb,1000lb can only do damage to Light Flak, SpecialTarget, Urban1,Urban2, and Urban3 units.  
+-Veteran aircraft now fire veteran munitions.
+-If the number of German Ports divided by 3 is less than the corresponding value for the turn and location, then a convoy is generated. So, since 7 is always larger than 19/3, all the convoys are generated every third turn, unless the Germans capture some English Ports and build military ports there.
+-Each city has a number of trains it can unload each turn. 2 trains per civilian improvement, and one more for the military port itself. If the port has unloaded fewer trains than the limit, the convoy can dock, otherwise it can't. If the convoy will unload more trains than the city can accommodate, the extra trains will be unloaded, but not have any movement points available.
+-Unloading convoys will also generate a fuel bonus worth 300 plus 300 more for each refinery in the city, and worth 100 less for each military port the Allies are "missing".
+-The following units will be destroyed if they are in a city when its military port is destroyed. This should act as a counter to "hiding" units in cities, especially convoys until they can be unloaded.
+local killWithMilitaryPort = {
+[unitAliases.Convoy.id] = true,
+[unitAliases.FreightTrain.id] = true,
+[unitAliases.GermanTaskForce.id]=true,
+[unitAliases.AlliedTaskForce.id]=true,
+[unitAliases.UBoat.id]=true,
+[unitAliases.Carrier.id]=true,
+}
+-Killing a convoy in this way still increments the German score.
+-Eliminated variable production cost for submarines and destroyers.
+-When a Wolf Pack is destroyed at sea, a city among all the cities with military ports is chosen. If the city is owned the Allies, the Wolf Pack is killed. If the city is owned by Germany, the unit is re-created in that city.
+-There is now a "sabotage port" improvement option for the Germans.  Building this removes the port facility voluntarily.  This would be done to deny the Allies the opportunity to capture a port intact. The Allies get a one-time bonus of 3x battle groups if they capture an intact port.  Sabotaging a port is costly and has a large cost-per-turn in terms of fuel.
