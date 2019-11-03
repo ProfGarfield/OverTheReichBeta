@@ -573,10 +573,14 @@ end
 -- function gen.isSubmarine(unitType) end
 
 -- gen.giveSubmarine(unitType)-->void
--- function gen.giveSubmarine(unitType) end
+function gen.giveSubmarine(unitType)
+   unitType.flags = setBit1(unitType.flags,4)
+end
 
 -- gen.removeSubmarine(unitType)-->void
--- function gen.removeSubmarine(unitType) end
+function gen.removeSubmarine(unitType) 
+    unitType.flags = setBit0(unitType.flags,4)
+end
 
 -- gen.isAttackAir(unitType)-->boolean
 -- function gen.isAttackAir(unitType) end

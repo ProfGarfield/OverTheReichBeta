@@ -1008,8 +1008,8 @@ unitAliases.AlliedFlak			= civ.getUnitType(72)
 unitAliases.He111				= civ.getUnitType(73)
 unitAliases.Sunderland			= civ.getUnitType(76)
 unitAliases.HermannGraf			= civ.getUnitType(78)
-unitAliases.JosefPriller		= civ.getUnitType(79) -- Should eventually search for Destroyer and remove/update
-unitAliases.AdolfGalland			= civ.getUnitType(80) -- Should eventually search for LightCruiser and remove/update
+unitAliases.JosefPriller		= civ.getUnitType(79) 
+unitAliases.AdolfGalland		= civ.getUnitType(80) 
 unitAliases.GermanTaskForce		= civ.getUnitType(81)
 unitAliases.AlliedTaskForce		= civ.getUnitType(82)
 unitAliases.RedTails			= civ.getUnitType(83)
@@ -5652,6 +5652,70 @@ local function canDockFreighter(city)
 end
 --]]
 
+-- these units should only have the sub flag during the allied turn
+local subFlagDuringAlliedTurn={
+unitAliases.Me109G6				,
+unitAliases.Me109G14			,
+unitAliases.Me109K4				,
+unitAliases.Fw190A5				,
+unitAliases.Fw190A8				,
+unitAliases.Fw190D9				,
+unitAliases.Ta152				,
+unitAliases.Me110				,
+unitAliases.Me410				,
+unitAliases.Ju88C				,
+unitAliases.Ju88G				,
+unitAliases.He219				,
+unitAliases.He162				,
+unitAliases.Me163				,
+unitAliases.Me262				,
+unitAliases.Ju87G				,
+unitAliases.Fw190F				,
+unitAliases.Do335				,
+unitAliases.Do217				,
+unitAliases.He277				,
+unitAliases.Arado234			,
+unitAliases.Go229				,
+unitAliases.EgonMayer			,
+unitAliases.He111				,
+unitAliases.HermannGraf			,
+unitAliases.JosefPriller		,
+unitAliases.AdolfGalland		,
+--unitAliases.Ju188				,
+unitAliases.hwSchnaufer			,
+}
+
+-- these units should only have the sub flag during the German turn
+local subFlagDuringGermanTurn={
+unitAliases.Beaufighter			,
+unitAliases.MosquitoII			,
+unitAliases.MosquitoXIII		,
+unitAliases.Stirling			,
+unitAliases.Halifax				,
+unitAliases.Lancaster			,
+unitAliases.Pathfinder			,
+}
+
+-- need afterProduction and onScenarioLoaded
+local function setSubFlag()
+    if civ.getCurrentTribe() == tribeAliases.Germans then
+        for __,unitType in pairs(subFlagDuringGermanTurn) do
+            gen.giveSubmarine(unitType)
+        end
+        for __,unitType in pairs(subFlagDuringAlliedTurn) do
+            gen.removeSubmarine(unitType)
+        end
+    elseif civ.getCurrentTribe() == tribeAliases.Allies then
+        for __,unitType in pairs(subFlagDuringAlliedTurn) do
+            gen.giveSubmarine(unitType)
+        end
+        for __,unitType in pairs(subFlagDuringGermanTurn) do
+            gen.removeSubmarine(unitType)
+        end
+    end
+end
+
+
 
 -- point values for aircraft for experten
 local aircraftPointValues = {
@@ -6531,7 +6595,7 @@ local function doScouting(activePlayer)
 end
 console.doScouting = doScouting
 
-
+--[[ superceeded
 -- These are units which should have submarine qualities during the
 -- opponent's turn, but not during the player's turn
 -- (this way they are invisible until discovered, but don't carry munitions)
@@ -6580,6 +6644,7 @@ local function setSubQualities()
     end
 end
 console.setSubQualities = setSubQualities
+--]]
 
 
 -- ships with the ability to carry units and the capacity they possess
@@ -7689,7 +7754,8 @@ civ.scen.onLoad(function (buffer)
 end)
 
 civ.scen.onScenarioLoaded(function ()
-    setSubQualities()
+    --setSubQualities()
+    setSubFlag()
     if civ.getActiveUnit() then
         harbourUnitActivationFunction(civ.getActiveUnit())
     end
@@ -8890,7 +8956,8 @@ local function afterProduction(turn,tribe)
     setUrbanDefenseValue()
     setFlagFalse("NoUpkeepWarningThisTurn")
     setCounter("UpkeepWarningTreasuryLevel",upkeep.computeCosts(tribe))
-    setSubQualities()
+    --setSubQualities()
+    setSubFlag()
     clouds.updateAllWeather(state.mapStorageTable,state.stormInfoTable,clouds.catInfoTable,state.map1FrontStatisticsTable,state.map2FrontStatisticsTable)
     --local aptext = "It is turn "..tostring(turn).." and the tribe is "..tribe.name..".  This should appear only once per turn per tribe."
     --civ.ui.text(func.splitlines(aptext))
