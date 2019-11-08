@@ -1367,8 +1367,8 @@ local artilleryUnitTypes = {
 	["GermanLightFlak"] = { unitType=civ.getUnitType(119), munitionCreated=civ.getUnitType(116), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,  -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115 -114}, movementCostOfMunition=2, moneyCostOfMunition=0, displayText=nil },
 	["AlliedLightFlak"] = { unitType=civ.getUnitType(2), munitionCreated=civ.getUnitType(116), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,  -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115 -114}, movementCostOfMunition=2, moneyCostOfMunition=0, displayText=nil },
 	--["Carrier"] = { unitType=civ.getUnitType(82), munitionCreated=civ.getUnitType(110), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=3, moneyCostOfMunition=0, displayText=nil },
-	["damagedB17F"] = { unitType=civ.getUnitType(105), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=20, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity },
-	["damagedB17G"] = { unitType=civ.getUnitType(107), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=20, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity },
+	--["damagedB17F"] = { unitType=civ.getUnitType(105), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=20, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity },
+	--["damagedB17G"] = { unitType=civ.getUnitType(107), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=20, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity },
 	["GermanArmyGroup"] = { unitType=civ.getUnitType(69), munitionCreated=civ.getUnitType(114), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=8, moneyCostOfMunition=0, displayText=nil },
 	["GermanBatteredArmyGroup"] = { unitType=civ.getUnitType(70), munitionCreated=civ.getUnitType(114), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=6, moneyCostOfMunition=0, displayText=nil },
 	["AlliedArmyGroup"] = { unitType=civ.getUnitType(74), munitionCreated=civ.getUnitType(114), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=8, moneyCostOfMunition=0, displayText=nil },
@@ -1464,8 +1464,8 @@ local validResponseHeavyBombers = {unitAliases.FiftyCal.id,unitAliases.TwentyMM.
 -- .bonusUnit (optional) creates an additional unit of this type (no home city, no vet status)
 -- .bonusUnitQuantity (optional) creates quantity of .bonusUnit (absent means 1)
 local survivingUnitTypes ={
-["B17F"] = {unitType=unitAliases.B17F, replacingUnit = unitAliases.damagedB17F , --[[preserveVetStatus = true,]] bonusUnit=unitAliases.DefensiveFire, bonusUnitQuantity = 0, replacementVetStatus = true},
-["B17G"] = {unitType=unitAliases.B17G, replacingUnit = unitAliases.damagedB17G , --[[preserveVetStatus = true,]] bonusUnit=unitAliases.DefensiveFire, bonusUnitQuantity = 0, replacementVetStatus = true}
+["B17F"] = {unitType=unitAliases.B17F, replacingUnit = unitAliases.damagedB17F , --[[preserveVetStatus = true,]] bonusUnit=unitAliases.DefensiveFire, bonusUnitQuantity = 0, replacementVetStatus = true,preserveHome=true},
+["B17G"] = {unitType=unitAliases.B17G, replacingUnit = unitAliases.damagedB17G , --[[preserveVetStatus = true,]] bonusUnit=unitAliases.DefensiveFire, bonusUnitQuantity = 0, replacementVetStatus = true,preserveHome=true}
 
 }
 
@@ -3163,6 +3163,7 @@ local function killPortExtras(winner,loser)
     end
     for unit in city.location.units do
         if killWithMilitaryPort[unit.type.id] then
+            log.onUnitKilled(winner,unit)
             local killDialog=civ.ui.createDialog()
             killDialog.title = "Defense Minister"
             killDialog:addText("A "..unit.type.name.." was destroyed in port.")
@@ -5552,6 +5553,8 @@ local function killFunction(deadUnit,reactingUnit)
 	                newUnit.homeCity = replacingHome
 	                newUnit.veteran = replacingVetStatus
 	                replacementUnit = newUnit
+                    local deadUnitRemainingMove = deadUnit.type.move - deadUnit.moveSpent
+                    replacementUnit.moveSpent = math.max(0,replacementUnit.type.move-deadUnitRemainingMove)
 	            end --1st instance for i=1,quantityToProduce
 	            if unitSurvivalInfo.bonusUnit then
 	                quantityToProduce = unitSurvivalInfo.bonusUnitQuantity or 1
@@ -7658,36 +7661,6 @@ civ.scen.onKeyPress(function(keyID)
             return -- if radar used, no need to check other things in onKeyPress
         end
     end 
-
-	-- Old Radar functionality, can probably be deleted (will keep for now, just in case)
-	--[[if keyID == specialNumbers.primaryAttackKey and civ.getActiveUnit() then -- k radar user trigger
-	    local activeUnit = civ.getActiveUnit()
-	    for __,radarUnit in pairs(type1RadarUsers) do
-	        if activeUnit.type == radarUnit.unitType then
-	            local correctTerrain = false
-	            for __,terrainNumber in pairs(radarUnit.allowedTerrain) do
-	                if activeUnit.location.terrainType % 16 == terrainNumber then
-	                    correctTerrain = true
-	                end
-	            end -- for __, terrainNumber
-	            if correctTerrain then
-	                local unitFound = radar.radarSweep(activeUnit.location,radarUnit.range,activeUnit.owner,
-	                type1RadarInvisible, civ.getTile(specialNumbers.radarSafeTile[1],
-	                                                 specialNumbers.radarSafeTile[2],
-	                                                 specialNumbers.radarSafeTile[3]),
-	                unitAliases.Photos)
-	                if unitFound then
-	                    civ.ui.text(func.splitlines("Radar detects Enemies!"))
-	                else
-	                    civ.ui.text(func.splitlines("Radar detects no Enemies."))
-	                end
-	                activeUnit.moveSpent = math.min(activeUnit.type.move,activeUnit.moveSpent+radarUnit.moveCost)
-	                civ.ui.centerView(activeUnit.location)
-	            end--if correctTerrain
-	        end -- end if activeUnit.type == radarUnit.Type
-	    end --for __,radarUnit in type1RadarUsers
-	
-	end --if keyID== 75 k radar user trigger]]
 	if keyID == specialNumbers.primaryAttackKey and civ.getActiveUnit() and civ.getActiveUnit().type == unitAliases.Destroyer then -- k destroyer convoy trigger
 	    generateFreightersRegion1(civ.getActiveUnit())
 	end
@@ -7755,6 +7728,7 @@ end)
 
 civ.scen.onScenarioLoaded(function ()
     --setSubQualities()
+    civ.ui.centerView(civ.getTile(407,1,0))
     setSubFlag()
     if civ.getActiveUnit() then
         harbourUnitActivationFunction(civ.getActiveUnit())
@@ -9732,7 +9706,9 @@ local function afterProduction(turn,tribe)
         --    civ.ui.text(textAliases.germanPointsVictory)
         end
     end
-	
+    if turn == 1 then
+        text.simple("Make sure you set the 'Always wait at end of turn.' game option.")
+    end
 end
 console.afterProduction = function() afterProduction(civ.getTurn(),civ.getCurrentTribe()) end
 
