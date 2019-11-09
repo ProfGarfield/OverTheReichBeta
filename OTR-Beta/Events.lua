@@ -6103,7 +6103,9 @@ local function uncoverTarget(munitionGenerator)
     -- to an adjacent tile first if a valid tile is available
     for __,offset in pairs(offsets) do
 		local t = civ.getTile(center.x+offset[1],center.y+offset[2],center.z)
-        moveForbiddenDefenders(t)
+        if t then
+            moveForbiddenDefenders(t)
+        end
     end
 	for __,offset in pairs(offsets) do
 		local t = civ.getTile(center.x+offset[1],center.y+offset[2],center.z)
