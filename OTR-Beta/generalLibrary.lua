@@ -1002,13 +1002,13 @@ function gen.rehomeUnitsInCapturedCity(city,defender)
 end
 
 
--- gen.selectNextActiveUnit(activeUnit,customWeightFn)-->void
+-- gen.selectNextActiveUnit(activeUnit,source,customWeightFn)-->void
 -- use as the first line inside the function given to
 -- civ.scen.onActivateUnit(function(unit,source)-->void)
 -- the line should be
---      gen.selectNextActiveUnit(unit,customWeightFn)
---      (note: if the first argument to function(unit,source)
---      isn't called 'unit', use the actual name)
+--      gen.selectNextActiveUnit(unit,source,customWeightFn)
+--      (note: if the arguments to function(unit,source)
+--      arent called 'unit' and 'source', use the actual name)
 -- Code sets all other units (owned by the same tribe)
 -- to the wait order, except the next best unit
 -- customWeightFn(unit,activeUnit)-->integer
@@ -1039,12 +1039,16 @@ function gen.betterUnitManualWait()
     end
 end
 
-function gen.selectNextActiveUnit(activeUnit,customWeightFn)
+
+
+function gen.selectNextActiveUnit(activeUnit,source,customWeightFn)
     if  (not civ.getCurrentTribe().isHuman) then
         -- If the AI is playing, we don't want to interfere
         return 
     end
     saveActiveUnit = activeUnit
+    -- if unit activated manually, clear the manual wait for that unit
+    waitingUnits[activeUnit.id]=nil
     local bestWaitingUnit = nil
     local bestWaitingValue = math.huge
     local bestNotWaitingUnit = nil

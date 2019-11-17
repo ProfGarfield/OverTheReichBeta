@@ -127,24 +127,24 @@
 -2,			; MUST BE HERE! TERMINATOR!
 
 @@Interceptors I
-Interceptor aircraft are designed to attack enemy bombers.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
+Interceptor aircraft are designed to attack enemy bombers.  They fire medium ammo.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
 
 @@Interceptors II
-Interceptor aircraft are designed to attack enemy bombers.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
+Interceptor aircraft are designed to attack enemy bombers.  They fire medium ammo.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
 
 @@Interceptors III
-Interceptor aircraft are designed to attack enemy bombers.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
+Interceptor aircraft are designed to attack enemy bombers.  They fire medium ammo.  They tend to have higher reaction stats against bombers and can attack up to three times per turn.  Researching better interceptor technologies will allow models with increased speed, range, and reactive attacks.
 
 @@Escort Fighters I
-Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
+Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  They fire light ammo.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
 
 @@Escort Fighters II
-Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
+Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  They fire light ammo.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
 
 @@NOT USED (Automobile)
 
 @@Escort Fighters III
-Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
+Escort aircraft are meant to stack on top of bombers and other aircraft that have weaker defensive stats.  They fire light ammo.  Escorts can typically attack twice per turn.  They tend to have good reactive attacks vs. fighters.  Researching better escort technologies will allow models with increased speed, range, and reactive attacks.
 
 @@NOT USED (Bridge Building)
 
@@ -337,7 +337,7 @@ These small interceptors had fuel for only a few minutes for combat action and l
 Such simplified and dangerous planes were the products of the last phase of the Third Reich, when the lack of materials and the dire need for a strong defense against the Allied bombing raids required such craft to be built quickly in underground factories. During this period the Nazi authorities also considered the use of selbstopfer (suicide) planes such as the Reichenberg (a manned version of the V-1 flying bomb), and in one case of actual use, a "special detachment" unit dedicated to desperate aerial ramming tactics, known as Sonderkommando Elbe.
 
 @@Wilde Sau
-Allows the Germans to transfer aircraft from day to night operations and vice versa by pressing "u."  You are free to transfer as many aircraft as you like, but doing so ends their turn.
+Allows the Germans to transfer aircraft from day to night operations and vice versa by pressing "u."  You are free to transfer as many aircraft as you like, but doing so ends their turn.  While you can move night fighters to the day map, they will only be able to fly at low altitude (this is because to native transport in the base game, a unit must be allowed on both maps.  Allowing night fighters on the low alt map would mean they can be built there, which is undesirable).
 
 Wilde Sau (German for wild boar) was the term given by the Luftwaffe to the tactic used from 1943 to 1944 during World War II by which British night bombers were engaged by single-seat day-fighter aircraft flying in the Defence of the Reich.
 
@@ -423,6 +423,8 @@ Granted by events after the Allies accumulate 250 points, this technology allows
 The Foggia Airfield Complex was a series of World War II military airfields located within a 40 km (25 mi) radius of Foggia, in the Province of Foggia, Italy. The airfields were used by the United States Army Air Force Fifteenth Air Force as part of the strategic bombardment campaign against Nazi Germany in 1944 and 1945, as well as by Twelfth Air Force and the Royal Air Force during the Italian Campaign (1943–1945).
 
 @@Operation Overlord Prep.
+NOTE: this tech is no longer used in this scenario.
+
 Granted by events after the Allies accumulate 1,000 points, this technology allows the Allies to prepare to invade the continent by building landing craft.
 
 "Overlord" was the name assigned to the establishment of a large-scale lodgement on the Continent. The first phase, the amphibious invasion and establishment of a secure foothold, was code-named Operation Neptune. To gain the required air superiority needed to ensure a successful invasion, the Allies launched a bombing campaign (codenamed Operation Pointblank) to target German aircraft-production, fuel supplies, and airfields. Under the Transport Plan, communications infrastructure and road and rail links were bombed to cut off the north of France and to make it more difficult to bring up reinforcements. These attacks were widespread so as to avoid revealing the exact location of the invasion. Elaborate deceptions were planned to prevent the Germans from determining the timing and location of the invasion.
@@ -586,13 +588,13 @@ This improvement is not used in this scenario.
 Red Army units can only be built in a city that has this improvement, and this improvement cannot be built anywhere else besides 'The Russian Front' city on the far edge of the map.
 
 @@Civilian Population I
-Replaces temple.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder.  
+Replaces temple.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder.  The different "tiers" of civilian population correspond to the different tiers of fuel refineries, aircraft factories, and regular factories in that a city must have civilian population I to build industry I and so on.  Thus, a great tactic for the Allies is to make sure that their bombers strike the same cities in unison.  The USAAF can knock out the industries and by destroying the civilian population, the RAF can ensure the factories can't be rebuilt until such time that thee workers' homes are rebuilt.  Also, the higher the civilian population of a city, the more freighters that can unload there each turn.
 
 @@Fuel Refinery I
-Replaces marketplace.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade).  
+Replaces marketplace.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade).  Allied attacks on German fuel industries will also reduce the German's fuel stockpiles.
 
 @@Aircraft Factory I
-Replaces library.  Only cities with this improvement can build prototype I units (trade units).  This improvement is tied to an aircraft factory target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map and an aircraft factory unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the factory on the low-altitude map.  Sometimes, this is near a city in question, but often it is off in the distance.  It wouldn't be a terrible idea to build airfields near these factories as that is one way to increase their production.  The downside is that they typically won't be connected to railtrack, so if the factory goes, it will be hard to keep it in supply.
+Replaces library.  This improvement is tied to an aircraft factory target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map and an aircraft factory unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the factory on the low-altitude map.  Sometimes, this is near a city in question, but often it is off in the distance.  It wouldn't be a terrible idea to build airfields near these factories as that is one way to increase their production.  The downside is that they typically won't be connected to railtrack, so if the factory goes, it will be hard to keep the airfield in supply.
 
 @@Quartermaster
 Replaces courthouse.  The German player will want to consider building these in different cities to reduce the amount of fuel that is diverted to other fronts ('corruption' renamed).
@@ -604,19 +606,19 @@ Replaces city walls.  Is a mechanism so that population center cities will look 
 Replaces aqueduct.  This cannot be built, destroyed, or sold.
 
 @@Fuel Refinery II
-Replaces bank.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade).  
+Replaces bank.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade).  Allied attacks on German fuel industries will also reduce the German's fuel stockpiles.
 
 @@Civilian Population II
-Replaces cathedral.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder. 
+Replaces cathedral.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder.  The different "tiers" of civilian population correspond to the different tiers of fuel refineries, aircraft factories, and regular factories in that a city must have civilian population I to build industry I and so on.  Thus, a great tactic for the Allies is to make sure that their bombers strike the same cities in unison.  The USAAF can knock out the industries and by destroying the civilian population, the RAF can ensure the factories can't be rebuilt until such time that thee workers' homes are rebuilt.  Also, the higher the civilian population of a city, the more freighters that can unload there each turn.
 
 @@Aircraft Factory II
-Replaces university.  This improvement is tied to an aircraft factory target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map and an aircraft factory unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the factory on the low-altitude map.  Sometimes, this is near a city in question, but often it is off in the distance.  It wouldn't be a terrible idea to build airfields near these factories as that is one way to increase their production.  The downside is that they typically won't be connected to railtrack, so if the factory goes, it will be hard to keep it in supply.
+Replaces university.  This improvement is tied to an aircraft factory target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map and an aircraft factory unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the factory on the low-altitude map.  Sometimes, this is near a city in question, but often it is off in the distance.  It wouldn't be a terrible idea to build airfields near these factories as that is one way to increase their production.  The downside is that they typically won't be connected to railtrack, so if the factory goes, it will be hard to keep the airfield in supply.
 
 @@Shipping Losses
 This is given to the Allies after they sustain significant shipping losses.  It has a high cost and cannot be sold.  They receive one of these in a random city every 20th freighter sunk.
 
 @@Civilian Population III
-Replaces colosseum.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder. 
+Replaces colosseum.  This improvement is tied to an urban target unit on the night map.  Building this improvement creates urban terrain on the low-altitude map and an urban target unit on the night map. The destruction of that urban target unit removes this improvement and creates firestorm and rubble terrain near the city on the low-altitude map, leading towards starvation and civil disorder.  The different "tiers" of civilian population correspond to the different tiers of fuel refineries, aircraft factories, and regular factories in that a city must have civilian population I to build industry I and so on.  Thus, a great tactic for the Allies is to make sure that their bombers strike the same cities in unison.  The USAAF can knock out the industries and by destroying the civilian population, the RAF can ensure the factories can't be rebuilt until such time that thee workers' homes are rebuilt.  Also, the higher the civilian population of a city, the more freighters that can unload there each turn.
  
 @@Industry I
 Replaces factory.  This improvement is tied to an industrial target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map that is high in production shields and an industrial target unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's industrial production (shields). 
@@ -640,16 +642,16 @@ This improvement is not used in this scenario.
 This improvement is not used in this scenario. 
 
 @@Fuel Refinery III
-Replaces stock exchange.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade). 
+Replaces stock exchange.  This improvement is tied to a refinery target unit on the high-altitude daylight map.  Building this improvement creates refinery terrain on the low-altitude map and a refinery unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade). Allied attacks on German fuel industries will also reduce the German's fuel stockpiles.
 
 @@City III
 Replaces sewer system.  This cannot be built, destroyed, or sold.
 
 @@Rationing
-This improvement is not used in this scenario. 
+This improvement is not used in this scenario.  It might eventually be used for balancing.
 
 @@Railyards
-Replaces superhighways.  This improvement is tied to a rail depot target unit on the high-altitude daylight map.  Building this improvement creates this unit and also changes terrain on the low-altitude day and night map to railtrack, which trains can utilize.  When this unit is destroyed, this improvement is removed from the city and the railtrack square is removed, blocking the train's path until the improvement is rebuilt and the railtrack restored.
+Replaces superhighways.  This improvement is tied to a rail depot target unit on the high-altitude daylight map.  Building this improvement creates this unit and also changes terrain on the low-altitude day and night map to railtrack, which trains can utilize.  When this unit is destroyed, this improvement is removed from the city and the railtrack square is removed, blocking the train's path until the improvement is rebuilt and the railtrack restored.  Note that units can strategically redeploy along the rail system between two cities that have this improvement, but only if there is a clear path between them (i.e., the railtrack is not severed).
 
 @@Aircraft Factory III
 Replaces research lab.  Only cities possessing this improvement may build "Prototypes II" units, which are a better trade unit and bring in more science beakers. This improvement is tied to an aircraft factory target unit on the high-altitude daylight map.  Building this improvement creates industrial terrain on the low-altitude map and an aircraft factory unit on the high-altitude daylight map.  The destruction of that unit removes this improvement and creates rubble terrain near the factory on the low-altitude map.  Sometimes, this is near a city in question, but often it is off in the distance.  It wouldn't be a terrible idea to build airfields near these factories as that is one way to increase their production.  The downside is that they typically won't be connected to railtrack, so if the factory goes, it will be hard to keep it in supply.
@@ -658,6 +660,8 @@ Replaces research lab.  Only cities possessing this improvement may build "Proto
 This is a very expensive unit that increases the city's resistance to aerial attack.
 
 @@Sabotage Port
+Note: This is not currently used in this scenario.
+
 The Germans have the option to sabotage their own ports to prevent them from falling into enemy hands.  The reason they would want to do this is because if the Allies manage to capture a port intact, they will received a one time bonus of three Battle Groups in that city.  To discourage abuse by the German player, this improvement cannot be sold when built and costs 100 fuel per turn.  Thus, the German player will want to use it sparingly, and only in cities where an invasion seems imminent.  
 
 @@Industry III
@@ -670,13 +674,13 @@ Replaces harbor.  Is a source of extra food for cities but no longer has any eff
 This improvement is not used in this scenario. 
 
 @@Jagdfliegerschule
-The Germans have the option of building exceptionally expensive Jagdfliegerschulen.  These will allow them to provide a steady stream of trained pilots to the front, however it has a very high cost in fuel meaning that it is unlikely the Germans will be able to build many of these, and they may find maintaining even one cost-prohibitive.   
+The Germans have the option of building exceptionally expensive Jagdfliegerschulen.  These will allow them to provide a steady stream of trained pilots to the front, however it has a very high cost in fuel meaning that it is unlikely the Germans will be able to build many of these, and they may find maintaining even one cost-prohibitive.  Please note that if one is built on the daytime map, it will also be built on the night map, and vice versa.
 
 @@Wehrmacht
 This improvement represents the cost, in fuel, of all German military operations across the war.  The improvement cannot be sold, but will automatically be destroyed if the Allies capture a city.  If the Germans recapture that city, it will not be rebuilt as presumably they would also capture some Allied fuel stores.  This improvement replaces the police station, but its main purpose is to represent the considerable fuel costs necessary to conduct the war.
 
 @@Military Port
-Replaces port facility.  Only cities with this improvement can produce naval units.  This improvement represents all the military naval installations including sub pens in the world.  The improvement is tied to a military port unit on the high-altitude map.  Destroying that unit removes this improvement.  Rebuilding this improvement restores that unit.  At the start of each turn, the game checks to see how many of these units each side possesses.  The Allies get 100 extra fuel supplies for every military port the Allies own o nthe map, and a further 100 fuel supplies for every military port of the Germans that has been destroyed and is therefore not on the map.  The Allies have 10 military port units whereas the Germans have 19.  Theoretically, this could provide up to 2900 extra fuel supplies for the Allies each turn. This abstractly represents the Battle of the Atlantic and the Allied bomber offensive against u-boat factories and sub pens.
+Replaces port facility.  Only cities with this improvement can produce naval units.  This improvement represents all the military naval installations including sub pens in the world.  The improvement is tied to a military port unit on the high-altitude map.  Destroying that unit removes this improvement.  Rebuilding this improvement restores that unit.  At the start of each turn, the game checks to see how many of these units each side possesses.  The Allies will gain significantly more freighters in the Atlantic once most of the German military ports are destroyed.
 
 @@Wilde Sau
 This improvement is not used in this scenario.
@@ -965,11 +969,11 @@ After the Allies have accumulated a large number of points and have invaded nort
 
 @@01 Construction Team
 
-Construction Teams are important units for both sides in this scenario.  Their main role is to establish new air bases (cities).  Every time that they establish a city on the low-altitude daylight map, a second city will automatically populate on the night map in the same location, and vice-versa.  Construction Teams can enter both maps by going to a switchyard (transporter) tile and pressing 'n.'  In addition to founding cities, Construction teams are also able to change grassland terrain on the low-alt map to 'installations,' which is the only tile that heavy flak guns and gun batteries can fire from.  Construction teams can also change grassland terrain on the night map to 'searchlights' which are low-defensive terrain - enemy aircraft flying through these will be very vulnerable to attack.  Finally, construction teams can deposit 'fuel dumps' (roads) to increase fueling capabilities.  
+Construction Teams are important units for both sides in this scenario.  Their main role is to establish new air bases (cities).  Every time that they establish a city on the low-altitude daylight map, a second city will automatically populate on the night map in the same location, and vice-versa.  Construction Teams can enter both maps by going to a switchyard (transporter) tile and pressing 'n.'  In addition to founding cities, Construction teams are also able to change grassland terrain on the low-alt map to 'installations,' on which heavy flak guns and gun batteries can be deployed.  Construction teams can also change grassland terrain on the night map to 'searchlights' which are low-defensive terrain - enemy aircraft flying through these will be very vulnerable to attack.  Finally, construction teams can deposit 'fuel dumps' (roads) to increase fueling capabilities.  
 
 @@02 Bofors 40mm
 
-This is light flak available to the Allies on the low-altitude day map and also the night map.  It fires more powerful ammunition than the heavy flak, but this ammunition cannot reach high-altitude targets.  Defensively, it can make 1 reactive attack per turn at a range of 2.  Flying at low altitude over enemy territory is a very dangerous mission!
+This is light flak available to the Allies on the low-altitude day map and also the night map.  It fires more powerful ammunition than the heavy flak, but this ammunition cannot reach high-altitude targets.  Defensively, it can make 1 reactive attack per turn at a range of 2.  Flying at low altitude over enemy territory is a very dangerous mission! The intended purpose of this unit is to defend airfields.
 
 @@03 Early Radar
 
@@ -986,11 +990,11 @@ This long-range aircraft can only fly at low-altitude by day and is meant to loc
 
 @@06 Freight Trains
 
-This unit can only be built in major population centers that have the Industry I improvement.  The purpose of this unit is to be built in the population centers and then delivered via railtrack to nearby airfields.  Once there, it should be disbanded to help build new aircraft and other units.  It can be used to help rush-build improvements in a pinch as well.  Given that "gold" has been renamed as "fuel" in this scenario, and given that all aircraft require fuel to attack, there is a significant advantage to using this unit to rush-build items rather than purchasing them and potentially grounding your aircraft in the process.  Freight trains will spawn for the Allies when a Freighter ship reaches a city with a port and presses 'k.'  The freighter is deleted and a freight train takes its place.  Freight trains can also spawn for Germany in Southern France assuming that they have sufficient Schutzen, Panzers, and Artillery in France to fight the French Resistance.
+This unit can only be built in major population centers that have the Industry I improvement.  The purpose of this unit is to be built in the population centers and then delivered via railtrack to nearby airfields.  Once there, it should be disbanded to help build new aircraft and other units.  It can be used to help rush-build improvements in a pinch as well.  Given that "gold" has been renamed as "fuel" in this scenario, and given that all aircraft require fuel to attack, there is a significant advantage to using this unit to rush-build items rather than purchasing them and potentially grounding your aircraft in the process.  Freight trains will spawn for the Allies when a Freighter ship reaches a city with a port and presses 'k.'  The freighter is deleted and a freight train takes its place.  Freight trains can also spawn for Germany in France assuming that they have sufficient ground forces in France to fight the French Resistance.
 
 @@07 Railyard
 
-These units are placed via events on the high-altitude daylight map whenever a city builds the "railyards" improvement.  Destroying this unit removes that improvment from the city and also changes some nearby "rail track" terrain to "bombed track" terrain, which is impassable to trains, thus inhibiting movement by freight trains from one place to the next.
+These units are placed via events on the high-altitude daylight map whenever a city builds the "railyards" improvement.  Destroying this unit removes that improvment from the city and also changes some nearby "rail track" terrain to "bombed track" terrain, which is impassable to trains, thus inhibiting movement by freight trains from one place to the next.  As many ground units can strategically redeploy between cities with railyards, these are a useful target.  They also provide the Allies with 2.5 points when destroyed.
 
 @@08 Aerial Photos
 
@@ -998,7 +1002,7 @@ This unit has one spy function: investigate city.  Recon aircraft can take aeria
 
 @@09 Sdkfz 7/2
 
-An anti-aircraft halftrack available to the Germans.  It carries light flak which it can fire from any terrain.  It is also good defensively against air attacks and can be used to defend airfields from strafing and bombing runs.  It is expensive to build because it is so versatile.  Defensively, it can make up to 2 reactive attacks per turn at a range of 2.  Flying at low altitude over enemy territory is a very dangerous mission!
+An anti-aircraft halftrack available to the Germans.  It carries light flak which it can fire from any terrain.  It is also good defensively against air attacks and can be used to defend airfields from strafing and bombing runs.  It is expensive to build because it is so versatile.  Defensively, it can make up to 2 reactive attacks per turn at a range of 2.  Its intended purpose is to rush to different locations to shoot down low-flying aircraft.
 
 @@10 88mm Flak Battery
 
@@ -1030,7 +1034,7 @@ The Fw190 is Germany's main daylight interceptor.  It carries medium guns and ca
 
 @@16 Fw190A8
 
-The Fw190 is Germany's main daylight interceptor, and the Fw190A8 expands on its arsenal.  It carries medium guns and can fire them 3 times per turn by pressing "k," or it can fire one set of air-to-air rockets per turn by pressing "backspace."  This enables it to make fast "slashing attacks" where it strikes the enemy and then flies off out of range.  Later variants are faster and can move further way.  Alternately, it can press home the attack if it feels Allied fighters are out of range.  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Fw190A8 can make up to 2 reactive attacks at a range of 1, and will have better success reacting against bombers than fighters.  It will also have better success reacting at low altitude than high altitude, as the type was a poor-performer at high altitudes historically.
+The Fw190 is Germany's main daylight interceptor, and the Fw190A8 expands on its arsenal.  It carries medium guns and can fire them 3 times per turn by pressing "k," or it can fire one set of air-to-air rockets per turn by pressing "backspace."  Unlike a bomber destroyer, bombers will still defend against rocket attacks  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Fw190A8 can make up to 2 reactive attacks at a range of 1, and will have better success reacting against bombers than fighters.  It will also have better success reacting at low altitude than high altitude, as the type was a poor-performer at high altitudes historically.
 
 @@17 Fw190D9
 
@@ -1038,34 +1042,34 @@ The Fw190D9 corrects issues with the A-series and is a capable high-altitude per
 
 @@18 Ta152
 
-The Ta152 is Germany's premier propellor-driven daylight interceptor.  It carries medium guns and can fire them 3 times per turn.  This enables it to make fast "slashing attacks" where it strikes the enemy and then flies off out of range.  It is very fast and can catch the P-51 Mustang.  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Ta152 can make up to 2 reactive attacks at a range of 3, and is Germany's only propeller-driven aircraft that can intercept jets, though the chances of doing so aren't good.
+The Ta152 is Germany's premier propellor-driven daylight interceptor.  It carries medium guns and can fire them 3 times per turn.  This enables it to make fast "slashing attacks" where it strikes the enemy and then flies off out of range.  It is very fast and can catch the P-51 Mustang.  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Ta152 can make up to 2 reactive attacks at a range of 3, and is Germany's only propeller-driven aircraft that can intercept jets, though the chances of doing so aren't good.  The Ta152 is quite capable at high altitutde.
 
 @@19 Military Port
 
-This unit represents all the military naval installations including sub pens in the world.  The unit is tied to a military port improvement.  Destroying the unit removes the improvement.  Rebuilding the improvement restores the unit.  At the start of each turn, the game checks to see how many of these units each side possesses.  The Allies can only unload freighters in cities that have a military port, so these are valuable targets for the Luftwaffe.  The number of freighters that the Allies can accumulate each turn is affected by the number of military ports that Germany possesses.  If the Allies capture a continental city with an intact military port, they will received a one-time bonus of three Battle Groups, so they may wish to wait before destroying all of these.
+This unit represents all the military naval installations including sub pens in the world.  The unit is tied to a military port improvement.  Destroying the unit removes the improvement.  Rebuilding the improvement restores the unit.  At the start of each turn, the game checks to see how many of these units each side possesses.  The Allies can only unload freighters in cities that have a military port, so these are valuable targets for the Luftwaffe.  The number of freighters that the Allies can accumulate each turn is affected by the number of military ports that Germany possesses.  
 
 @@20 Me110
-The Germans possess two bomber destroyers: The Me110 and Me410.  They are slow but can stay airborne for significant time.  They fire the air-to-air rocket, which is very powerful and can break up bomber formations.  They can only fire this once per turn, however, which means their movement is reduced to one, and they are therefore exceptionally vulnerable to counterattack.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  While bomber destroyers are very vulnerable to interception by enemy fighters, their rockets are meant to break up bomber formations and as such they will not draw defensive fire from bombers.  As they are so slow, bomber destroyers will not react defensively to nearby aircraft.
+The Germans possess two bomber destroyers: The Me110 and Me410.  They are slow but can stay airborne for significant time.  They fire the air-to-air rocket, which is very powerful and can break up bomber formations.  They can only fire this once per turn, however, which means their movement is reduced to one, and they are therefore exceptionally vulnerable to counterattack.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  While bomber destroyers are very vulnerable to interception by enemy fighters, their rockets are meant to break up bomber formations and as such they will not draw defensive fire from bombers.  As they are so slow, bomber destroyers will not react defensively to nearby aircraft.  These make good night fighters because they are often capable of destroying an aircraft in one pass, before it can escape into the night.
 
 @@21 Me410
 
-The Germans possess two bomber destroyers: The Me110 and Me410.  They are slow but can stay airborne for significant time.  They fire the air-to-air rocket, which is very powerful and can break up bomber formations.  They can only fire this once per turn, however, which means their movement is reduced to one, and they are therefore exceptionally vulnerable to counterattack.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  While bomber destroyers are very vulnerable to interception by enemy fighters, their rockets are meant to break up bomber formations and as such they will not draw defensive fire from bombers.  As they are so slow, bomber destroyers will not react defensively to nearby aircraft.
+The Germans possess two bomber destroyers: The Me110 and Me410.  They are slow but can stay airborne for significant time.  They fire the air-to-air rocket, which is very powerful and can break up bomber formations.  They can only fire this once per turn, however, which means their movement is reduced to one, and they are therefore exceptionally vulnerable to counterattack.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  While bomber destroyers are very vulnerable to interception by enemy fighters, their rockets are meant to break up bomber formations and as such they will not draw defensive fire from bombers.  As they are so slow, bomber destroyers will not react defensively to nearby aircraft.  These make good night fighters because they are often capable of destroying an aircraft in one pass, before it can escape into the night.
 
 @@22 Ju88C
 
-German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Ju88C can make 1 reactive attacks at a range of 1.  
+German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Ju88C can make 1 reactive attacks at a range of 1.  While it can be brought into daylight operations it can only be used at low altitude.  As a dedicated night fighter, it has the potential to escape into the night when attacked. 
 
 @@23 Ju88G
 
-German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  It also carries onboard that can be utilized via its secondary attack at no fuel cost.  This unit cannot land in population centers - only airfields.  Defensively, the Ju88G can make 2 reactive attacks at a range of 1. 
+German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  It also carries onboard radar that can be utilized via its secondary attack at no fuel cost, which is useful after an Allied bomber escapes an earlier attack.  This unit cannot land in population centers - only airfields.  Defensively, the Ju88G can make 2 reactive attacks at a range of 1. While it can be brought into daylight operations it can only be used at low altitude.  As a dedicated night fighter, it has the potential to escape into the night when attacked. 
 
 @@24 He219
 
-Very dangerous German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  It also carries onboard radar that can be utilized via its secondary attack at no fuel cost.  It is invisible until attack.  This unit cannot land in population centers - only airfields. Defensively, the He219 can make 2 reactive attacks at a range of 2. 
+Very dangerous German nightfighter with good speed and considerable range allowing it to stay airborne and search for targets.  It carries medium guns and can fire them twice per turn.  Attacks cost ten fuel points each.  It also carries onboard radar that can be utilized via its secondary attack at no fuel cost, , which is useful after an Allied bomber escapes an earlier attack.  This unit cannot land in population centers - only airfields. Defensively, the He219 can make 2 reactive attacks at a range of 2. While it can be brought into daylight operations it can only be used at low altitude.  As a dedicated night fighter, it has the potential to escape into the night when attacked. 
 
 @@25 He162
 
-German jet fighter that can attack up to 10 times per turn, though at a great cost (25 fuel per attack).  Attacking the full 10 times would also leave this fighter exceptionally vulnerable to enemy operations.  A better strategy is likely to attack 4-5 times and then flee at high speed.  These units are very vulnerable to being shot while on airfields and care should be taken to station them only at well-defended fields.  This unit cannot land in population centers - only airfields.  Defensively, the He162 can make 1 reactive attack at a range of 4, but this would require it to end its turn airborne, which would leave it considerably exposed to attack.  It can intercept jets.
+German jet fighter that can attack up to 10 times per turn, though at a great cost (25 fuel per attack).  Attacking the full 10 times would also leave this fighter exceptionally vulnerable to enemy operations on the Allied turn.  A better strategy is likely to attack 4-5 times and then flee at high speed.  These units are very vulnerable to being shot while on airfields and care should be taken to station them only at well-defended fields.  This unit cannot land in population centers - only airfields.  Defensively, the He162 can make 1 reactive attack at a range of 4, but this would require it to end its turn airborne, which would leave it considerably exposed to attack.  It can intercept jets.
 
 @@26 Me163
 
@@ -1073,19 +1077,20 @@ German rocket fighter with extremely short range, though it can attack up to 10x
 
 @@27 Me262
 
-German jet fighter that can attack up to 10 times per turn, though at a great cost (50 fuel per attack).  Attacking the full 10 times would also leave this fighter exceptionally vulnerable to enemy operations.  A better strategy is likely to attack 4-5 times and then flee at high speed.  These units are very vulnerable to being shot while on airfields and care should be taken to station them only at well-defended fields.  This unit cannot land in population centers - only airfields.  Defensively, the Me262 can make 2 reactive attacks at a range of 5, but this would require it to end its turn airborne, which would leave it considerably exposed to attack.  It can intercept jets.
+German jet fighter that can attack up to 10 times per turn, though at a great cost (50 fuel per attack).  Attacking the full 10 times would also leave this fighter exceptionally vulnerable to enemy operations on the Allied turn.  A better strategy is likely to attack 4-5 times and then flee at high speed.  These units are very vulnerable to being shot while on airfields and care should be taken to station them only at well-defended fields.  This unit cannot land in population centers - only airfields.  Defensively, the Me262 can make 2 reactive attacks at a range of 5, but this would require it to end its turn airborne, which would leave it considerably exposed to attack.  It can intercept jets.
 
 @@28 Ju87G
 
-A very slow close air support unit that carries an exceptionally powerful 1000lb bomb.  This makes the unit very good for attacking Allied warships and other hard targets on the low-alt map.  Attacks cost 5 fuel points. This unit cannot land in population centers - only airfields.  It is the only Luftwaffe bomber that can land on aircraft carriers.
+A very slow close air support unit that carries an exceptionally powerful 1000lb bomb.  This makes the unit very good for attacking Allied warships and other hard targets on the low-alt map.  Attacks cost 5 fuel points. This unit cannot land in population centers - only airfields.  It is the only Luftwaffe bomber that can land on aircraft carriers.  A Ju87 takes less damage from flak than most other aircraft and its 1,000lb bomb is best-used to destroy enemy flak installations.
 
 @@29 Fw190F8
 
-The Fw190F8 is an armored fighter-bomber that can be used to attack targets on the low-alt map.  Its primary attack is comprised of medium guns, which it can fire twice per turn at the cost of 5 fuel points.  It also carries a 1000lb bomb as a secondary attack, which also costs 5 fuel points. This unit cannot land in population centers - only airfields.  As this is a close support aircraft, it will not make any reactive attacks.
+The Fw190F8 is an armored fighter-bomber that can be used to attack targets on the low-alt map.  Its primary attack is comprised of medium guns, which it can fire twice per turn at the cost of 5 fuel points.  It also carries a 1000lb bomb as a secondary attack, which also costs 5 fuel points. This unit cannot land in population centers - only airfields.  As this is a close support aircraft, it will not make any reactive attacks.  A Fw190F8 takes less damage from flak than most other aircraft and its 1,000lb bomb is best-used to destroy enemy flak installations.
 
 @@30 Do335
 
-A fast German fighter-bomber that can be used to attack targets on the low-alt map.  Though not as resilient as the 190F8, it makes up for that with speed.  Its primary attack is comprised of medium guns, which it can fire twice per turn at the cost of 5 fuel points.  It also carries two powerful 1000lb bombs as a secondary attack, which also costs 5 fuel points. This unit cannot land in population centers - only airfields.  As this is a close support aircraft, it will not make any reactive attacks.
+A fast German fighter-bomber that can be used to attack targets on the low-alt map.  Though not as resilient as the 190F8, it makes up for that with speed.  Its primary attack is comprised of medium guns, which it can fire twice per turn at the cost of 5 fuel points.  It also carries two powerful 1000lb bombs as a secondary attack, which also costs 5 fuel points. This unit cannot land in population centers - only airfields.  As this is a close support aircraft, it will not make any reactive attacks.  A Do335 takes less damage from flak than most other aircraft and its 1,000lb bomb is best-used to destroy enemy flak installations.
+
 
 @@31 Do217
 
@@ -1117,15 +1122,16 @@ The Spitfire is a good all-around aircraft for the Allies, though it has short r
 
 @@38 Hurricane IV
 
-This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases a 500lb bomb once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 1.  The Hurricane IV is the only Allied fighter-bomber that can land on aircraft carriers.
+This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases a 500lb bomb once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 1.  The Hurricane IV is the only Allied fighter-bomber that can land on aircraft carriers.  Hurricanes take less damage from flak than most other aircraft.
 
 @@39 Typhoon
 
-This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases a 1000lb bomb once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 2.
+This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases a 1000lb bomb once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 2.  Typhoons take less damage from flak than most other aircraft and their 1,000lb bomb is best-used to destroy enemy flak installations.
 
 @@40 Tempest
 
-This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases two 1000lb bombs once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 3.
+This Royal Airforce fighter-bomber is limited to low-altitude.  It's primary attack fires medium guns up to two times per turn, and its secondary attack releases two 1000lb bombs once per sortie.  All attacks cost five fuel points.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 3.  Tempests take less damage from flak than most other aircraft and their 1,000lb bomb is best-used to destroy enemy flak installations.
+
 
 @@41 Meteor
 
@@ -1133,15 +1139,15 @@ British jet fighter that can attack up to 10 times per turn, though at a great c
 
 @@42 Beaufighter
 
-The Beaufighter is a British night fighter with limited range that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 1.
+The Beaufighter is a British night fighter with limited range that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it can make a reactive attack 1 time at a range of 1.  As a dedicated night fighter, it has the potential to escape into the night when attacked.  
 
 @@43 Mosquito NF Mk II
 
-The Mosquito NF Mk II is a British night fighter that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  Its primary attack fires the munitions.  It also carries radar on board which can be utilized up to four times per turn by pressing "backspace" for no fuel cost.  This unit cannot land in population centers - only airfields.  Defensively, it can react 2 times at a range of 1.
+The Mosquito NF Mk II is a British night fighter that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  Its primary attack fires the munitions.  It also carries radar on board which can be utilized up to four times per turn by pressing "backspace" for no fuel cost.  This unit cannot land in population centers - only airfields.  Defensively, it can react 2 times at a range of 1.  As a dedicated night fighter, it has the potential to escape into the night when attacked. 
 
 @@44 Mosquito NF Mk XIII
 
-The Mosquito NF Mk II is a British night fighter with limited range that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  Its primary attack fires the munitions.  It also carries radar on board as a secondary attack which can be utilized up to four times per turn for no fuel cost.  In addition to this, it is invisible until attack making it a very dangerous opponent. This unit cannot land in population centers - only airfields.  Defensively, it can react 2 times at a range of 2.
+The Mosquito NF Mk II is a British night fighter with limited range that can attack two times per turn with medium guns at a cost of 10 fuel points per attack.  Its primary attack fires the munitions.  It also carries radar on board as a secondary attack which can be utilized up to four times per turn for no fuel cost.  This unit cannot land in population centers - only airfields.  Defensively, it can react 2 times at a range of 2.  As a dedicated night fighter, it has the potential to escape into the night when attacked. 
 
 @@45 Industry I
 
@@ -1157,23 +1163,27 @@ This unit is tied to a factory (production) improvement in a particular city on 
 
 @@48 Prototypes I
 
+NOTE: This unit currently isn't in this scenario.
+
 Prototypes I take the place of Caravans in Over the Reich.  Though their fuel payout has been disabled, they do provide a healthy boost to research when delivered to other cities.  They can only be built in cities with basic Aircraft Factories.
 
 @@49 Prototypes II
+
+NOTE: This unit currently isn't in this scenario.
 
 Prototypes II take the place of freight in Over the Reich.  Though their fuel payout has been disabled, they do provide a healthy boost to research when delivered to other cities.  Their payout tends to be higher than those of Prototypes I. They can only be built in cities with Aircraft Factories III.
 
 @@50 P-47D11
 
-The first American escort plane available and a decent all-around aircraft.  It has a high defense bonus but limited range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  It fires light ammunition up to twice per turn at the cost of 5 fuel points per attack.  Its secondary attack is a 250lb bomb which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 1.  It has better reaction attacks at high altitude and has a very powerful dive bonus.
+The first American escort plane available and a decent all-around aircraft.  It has a high defense bonus but limited range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  It fires light ammunition up to twice per turn at the cost of 5 fuel points per attack.  Its secondary attack is a 250lb bomb which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 1.  It has better reaction attacks at high altitude and has a very powerful dive bonus.  It struggles at low altitude.
 
 @@51 P-47D25
 
-A versatile American escort plane that can also be a fighter-bomber.  It has a high defense bonus but limited range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is a 500lb bomb which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 2.  It has better reaction attacks at high altitude and has a very powerful dive bonus.
+A versatile American escort plane that can also be a fighter-bomber.  It has a high defense bonus but limited range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is a 500lb bomb which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 2.  It has better reaction attacks at high altitude and has a very powerful dive bonus.  It struggles at low altitude.
 
 @@52 P-47D40
 
-A versatile American escort plane that can also be a fighter-bomber.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is 2x1000lb bombs which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 3.  It has better reaction attacks at high altitude and has a very powerful dive bonus.
+A versatile American escort plane that can also be a fighter-bomber.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is 2x1000lb bombs which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 3.  It has better reaction attacks at high altitude and has a very powerful dive bonus.  It struggles at low altitude.
 
 @@53 SAVE
 
@@ -1201,15 +1211,15 @@ American jet fighter that can attack up to 10 times per turn, though at a great 
 
 @@59 Stirling
 
-Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop two 250lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  As a dedicated night bomber, it is invisible until attack, and its defensive armament has limited range - it will react 1 time at a range of 1.
+Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop two 250lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  As a dedicated night bomber, it has the potential to escape into the night when attacked.  Its defensive armament has limited range - it will react 1 time at a range of 1.
 
 @@60 Halifax
 
-Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop three 250lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  As a dedicated night bomber, it is invisible until attack, and its defensive armament has limited range - it will react 1 time at a range of 1.
+Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop three 250lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  As a dedicated night bomber, it has the potential to escape into the night when attacked.  Its defensive armament has limited range - it will react 1 time at a range of 1.
 
 @@61 Lancaster
 
-Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop three 500lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom. As a dedicated night bomber, it is invisible until attack, and its defensive armament has limited range - it will react 1 time at a range of 1.
+Allied nighttime strategic bomber designed for attacking urban populations deep in the Reich.  At full strength, can drop three 500lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom. As a dedicated night bomber, it has the potential to escape into the night when attacked.  Its defensive armament has limited range - it will react 1 time at a range of 1.
 
 @@62 Pathfinder
 
@@ -1231,15 +1241,15 @@ Allied tactical bomber that can attack at high or low altitude.  At full strengt
 
 @@66 B-17F
 
-Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  It cannot attack at low altitude.  At full strength, can drop two 250lb bombs per sortie  at the cost of 20 fuel.  This unit cannot land in population centers - only airfields in the United Kingdom.  The B-17F must be "killed" twice.  The first time it is killed, a damaged version takes its place.  This damaged version should be flown to England to have its veteran aircrew swapped into a new airframe by pressing '3'.  The B-17F is well-armed and will react defensively 2 times per turn at a range of 2.  All of these qualties make it a true "Flying Fortress."
+Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  It cannot attack at low altitude.  At full strength, can drop two 250lb bombs per sortie  at the cost of 20 fuel.  This unit cannot land in population centers - only airfields in the United Kingdom.  The B-17F must be "killed" twice.  The first time it is killed, a damaged version takes its place.  This damaged version should be flown to England to have its veteran aircrew swapped into a new airframe by pressing '3'.  The B-17F is well-armed and will react defensively 2 times per turn at a range of 2, but only at high altitude.  All of these qualties make it a true "Flying Fortress."
 
 @@67 B-24J
 
-Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  It cannot attack at low altitude (this is done for balancing aspects despite our knowledge that this type participated in the Ploesti raids and anti-submarine warfare).  At full strength, it will drop two 500lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  It can outpace enemy escorts, though interceptors can catch it.  While not totally historical, this differentiates the unit a bit more from the B-17.  Defensively, it will react 1 time at a range of 1.
+Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  It cannot attack at low altitude (this is done for balancing aspects despite our knowledge that this type participated in the Ploesti raids and anti-submarine warfare).  At full strength, it will drop two 500lb bombs per sortie at the cost of 20 fuel. This unit cannot land in population centers - only airfields in the United Kingdom.  It can outpace enemy escorts, though interceptors can catch it.  While not totally historical, this differentiates the unit a bit more from the B-17.  Defensively, it will react 1 time at a range of 1, but only at high altitude.
 
 @@68 B-17G
 
-Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  At full strength, can drop three 250lb bombs per turn at the cost of 20 fuel.  This unit cannot land in population centers - only airfields in the United Kingdom.  Spawns defensive fire when attacked.  The B-17G must be "killed" twice.  The first time it is killed, a damaged version takes its place.  This must also be destroyed.  It is well-armed and will react defensively 2 times per turn at a range of 3.  All of these qualties make it a true "Flying Fortress."
+Allied daylight strategic bomber designed for attacking high-altitude strategic targets like fuel refineries and industrial plants deep in the Reich.  At full strength, can drop three 250lb bombs per turn at the cost of 20 fuel.  This unit cannot land in population centers - only airfields in the United Kingdom.  Spawns defensive fire when attacked.  The B-17G must be "killed" twice.  The first time it is killed, a damaged version takes its place.  This must also be destroyed.  It is well-armed and will react defensively 2 times per turn at a range of 3, but only at high altitude.  All of these qualties make it a true "Flying Fortress."
  
 @@69 Battle Group
 
@@ -1253,7 +1263,7 @@ When a Battle Group is destroyed, there is a chance that survivors will regroup 
 
 Egon Mayer was a Luftwaffe pilot credited with 102 kills, all of which were claimed over the Western Front.  He was the first fighter pilot to score 100 victories exclusively on the Western Front, and helped develop the tactic of striking the USAAF heavy bombers from 12 o'clock high.  He would go on to destroy 26 of the behemoths. 
 
-Egon Mayer is one of several "Experten" units in the game which represent the absolute best German pilots available.  Graf can attack up to six times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters. If he is lost, the Germans will lose 500 fuel.
+Egon Mayer is one of several "Experten" units in the game which represent the absolute best German pilots available.  Graf can attack up to four times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters. If he is lost, the Germans will lose 500 fuel.
 
 @@72 3.7-inch Flak
 
@@ -1285,13 +1295,13 @@ Spitfires have one of the most powerful attacks in the game.  They are able to f
 
 Herman Graf served on both the Eastern and Western Fronts and on September 26, 1942, became the first pilot in history to claim 200 victories.  He was then withdrawn from combat and posted to a fighter pilot training school before again taking up various operational commands, this time in the West.  One such command was that of JG 50, which was established as a special high-altitude unit to intercept Allied Mosquito intruders.  He would end the war with 212 kills.
 
-Hermann Graf is one of several "Experten" units in the game which represent the absolute best German pilots available.  Graf can attack up to six times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
+Hermann Graf is one of several "Experten" units in the game which represent the absolute best German pilots available.  Graf can attack up to four times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
 
 @@79 Josef Priller
 
 Josef "Pips" Priller was a leading Experten of the Luftwaffe, having been credited with 101 victories, all of which were claimed over the Western Front.  On January 11, 1943 he assumed command of JG 26 "Schlageter" and was one of the few Luftwaffe pilots to sortie against the Allied invasion of Normandy on D-Day.  He later took part in Operation Bodenplatte during the Battle of the Bulge, and ended the war as Inspekteur der Jagdflieger West.
 
-Josef Priller is one of several "Experten" units in the game which represent the absolute best German pilots available.  Priller can attack up to six times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
+Josef Priller is one of several "Experten" units in the game which represent the absolute best German pilots available.  Priller can attack up to four times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
 
 @@80 Adolf Galland
 
@@ -1329,15 +1339,15 @@ This unit is tied to an aircraft factory (science) improvement in a particular c
 
 @@88 Refinery I
 
-This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.
+This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.  If the Allies destroy a German fuel refinery, the Germans will lose a bit of their fuel stockpile.
 
 @@89 Refinery II
 
-This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.
+This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.  If the Allies destroy a German fuel refinery, the Germans will lose a bit of their fuel stockpile.
 
 @@90 Refinery III
 
-This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.
+This unit is tied to a refinery (trade) improvement in a particular city on the low-altitude daylight map.  The destruction of this unit removes the improvement and creates rubble terrain near the city on the low-altitude map, reducing the city's fuel production (trade) until the improvement is rebuilt, which also respawns the unit and restores the terrain.  It cannot be protected by air units by stacking them on top of it - they will be moved via lua events.  If the Allies destroy a German fuel refinery, the Germans will lose a bit of their fuel stockpile.
 
 @@91 Urban Center I
 
@@ -1387,7 +1397,7 @@ Window is dropped by British pathfinder units with the objective of confusing Ge
 
 Heinz-Wolfgang Schnaufer was the highest-scoring night fighter ace in history, with 121 victories claimed, mostly against four-engine bombers of RAF Bomber Command.  He became so widely feared by Allied pilots that he was nicknamed, "The Spook of St. Trond" as that was his unit's base in Belgium.  He would end the war as Geschwaderkommodore of NJG 4 before being captured by the British.
 
-Heinz-Wolfgang Schnaufer is one of several "Experten" units in the game which represent the absolute best German pilots available.  Schnaufer can attack up to six times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
+Heinz-Wolfgang Schnaufer is one of several "Experten" units in the game which represent the absolute best German pilots available.  Schnaufer can attack up to four times per turn, fires medium guns, and has substantial defensive strength making him very hard to kill.  He also cannot be intercepted via reactive attacks except by P-51s and Tempest fighters.  If he is lost, the Germans will lose 500 fuel.
 
 @@103 Air-to-Air Rockets
 

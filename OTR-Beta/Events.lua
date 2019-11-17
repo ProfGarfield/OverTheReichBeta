@@ -570,6 +570,7 @@ cityAliases.Calais			 = civ.getCity(46)
 cityAliases.Lyon			 = civ.getCity(47)
 cityAliases.Brunswick		 = civ.getCity(48)
 cityAliases.Peenemunde		 = civ.getCity(49)
+cityAliases.London           = civ.getCity(50)
 cityAliases.Dover			 = civ.getCity(99)
 
 
@@ -1040,6 +1041,7 @@ unitAliases.RedArmyGroup        = civ.getUnitType(0)
 unitAliases.AlliedArmyGroup     = civ.getUnitType(74)
 unitAliases.AlliedBatteredArmyGroup = civ.getUnitType(75)
 unitAliases.constructionTeam    = civ.getUnitType(1)
+unitAliases.neutralTerritory = civ.getUnitType(106)
 
 local improvementAliases = {}
 improvementAliases.militaryPort = civ.getImprovement(34)
@@ -2497,6 +2499,7 @@ RIDT[unitAliases.He162.id] = intruder.radarInvisible
 RIDT[unitAliases.Me163.id] = intruder.radarInvisible
 RIDT[unitAliases.P80.id] = intruder.radarInvisible
 RIDT[unitAliases.Meteor.id] = intruder.radarInvisible
+RIDT[unitAliases.neutralTerritory.id]=intruder.radarInvisible
 
 
 -- All air units not otherwise included in RIDT are included as 'always spotted' (including munitions, though this probably doesn't matter)
@@ -2702,7 +2705,7 @@ local function radarDetectionFunction(radarUser,tile,range)
     elseif errorThresholdPerfect < tileErrorNumber and tileErrorNumber <= errorThresholdClose then
         local nineSquares = {}
         radar.diamond(tile,1,nineSquares,false)
-        local tileToReturn = nineSquares[math.random(1,9)]
+        local tileToReturn = nineSquares[math.random(1,#nineSquares)]
         if horizontalDistance(tileToReturn,radarUser.location) <= range then
             return tileToReturn
         else
@@ -3630,9 +3633,9 @@ canReact[unitAliases.GunBattery.id] = {maxAttacks = 4, range=3, lowMap = reactio
 
 canReact[unitAliases.FlakTrain.id] = {maxAttacks = 2, range = 2, anyMap = reactionGroups.allButJets}
 canReact[unitAliases.GermanFlak.id] = {maxAttacks = 4, range = 2, anyMap = reactionGroups.allButJets}
-canReact[unitAliases.AlliedFlak.id] = {maxAttacks = 4, range = 2, anyMap = reactionGroups.canInterceptGerman}
+canReact[unitAliases.AlliedFlak.id] = {maxAttacks = 4, range = 2, anyMap = reactionGroups.allButJets}
 canReact[unitAliases.GermanLightFlak.id] = {maxAttacks = 1, range = 2, sameMap = reactionGroups.allButJets}
-canReact[unitAliases.AlliedLightFlak.id] = {maxAttacks = 1, range = 2, sameMap = reactionGroups.allButJets}
+canReact[unitAliases.AlliedLightFlak.id] = {maxAttacks = 1, range = 2, sameMap = reactionGroups.germanInterceptors}
 canReact[unitAliases.Sdkfz.id] = {maxAttacks = 2, range = 2, lowMap = reactionGroups.allButJets}
 
 canReact[unitAliases.AlliedTaskForce.id] = {maxAttacks = 2, range = 2, lowMap = reactionGroups.allButJets}
@@ -3695,6 +3698,7 @@ canReact[unitAliases.Meteor.id] = {maxAttacks = 2, range = 5, sameTime = reactio
 canReact[unitAliases.B17F.id] = {maxAttacks = 2, range = 2, highMap = reactionGroups.germanInterceptors}
 canReact[unitAliases.B17G.id] = {maxAttacks = 2, range = 3, highMap = reactionGroups.germanInterceptors}
 canReact[unitAliases.B24J.id] = {maxAttacks = 1, range = 1, highMap = reactionGroups.germanInterceptors}
+canReact[unitAliases.MedBombers.id] = {maxAttacks = 1, range = 1, highMap = reactionGroups.germanInterceptors}
 
 --British bombers have lower range for defensive fire and this isn't generally as effective
 canReact[unitAliases.Stirling.id] = {maxAttacks = 1, range = 1, nightMap = reactionGroups.germanInterceptors}
@@ -4117,6 +4121,7 @@ ds.MeteorinterceptionJet = {{.7, 10}}
 
 --Allied bombers will fire but shouldn't do much damage alone, but intercepting large formations is not for the faint of heart.  
 ds.B24JdefensiveFireReaction = {{.6, 1},{.4,1},{.1,1},{.05,1}}
+ds.MedBombersdefensiveFireReaction = {{.6, 1},{.4,1},{.1,1},{.05,1}}
 ds.B17FdefensiveFireReaction = {{.8, 2},{.6,2},{.4,2},{.05,2}}
 ds.B17GdefensiveFireReaction = {{.8, 2},{.6,2},{.5,2},{.1,2}}
 
@@ -4516,13 +4521,13 @@ reactionDamage[unitAliases.Beaufighter.id] ={night = {{triggerTypes = reactionGr
 {triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.BeaufighterinterceptionHeavyFighter3},
 {triggerTypes=reactionGroups.luftwaffeBomber, damageSchedule = ds.BeaufighterinterceptionBomb3}},}
 
-reactionDamage[unitAliases.MosquitoII.id] ={night = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.MosquitoIIinterceptionFighter3},
-{triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.MosquitoIIinterceptionHeavyFighter3},
-{triggerTypes=reactionGroups.luftwaffeBomber, damageSchedule = ds.MosquitoIIinterceptionBomb3}},}
+reactionDamage[unitAliases.MosquitoII.id] ={night = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.MosquitoIIFighter3},
+{triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.MosquitoIIHeavyFighter3},
+{triggerTypes=reactionGroups.luftwaffeBomber, damageSchedule = ds.MosquitoIIBomb3}},}
 
-reactionDamage[unitAliases.MosquitoXIII.id] ={night = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.MosquitoXIIIinterceptionFighter3},
-{triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.MosquitoXIIIinterceptionHeavyFighter3},
-{triggerTypes=reactionGroups.luftwaffeBomber, damageSchedule = ds.MosquitoXIIIinterceptionBomb3}},}
+reactionDamage[unitAliases.MosquitoXIII.id] ={night = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.MosquitoXIIIFighter3},
+{triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.MosquitoXIIIHeavyFighter3},
+{triggerTypes=reactionGroups.luftwaffeBomber, damageSchedule = ds.MosquitoXIIIBomb3}},}
 
 reactionDamage[unitAliases.P80.id] ={high = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.P80DinterceptionFighter1},
 {triggerTypes=reactionGroups.luftwaffeHeavyFighter, damageSchedule = ds.P80interceptionHeavyFighter1},
@@ -4555,6 +4560,7 @@ dive = {{triggerTypes = reactionGroups.luftwaffeFighter, damageSchedule = ds.Met
 reactionDamage[unitAliases.B24J.id] ={high = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.B24JdefensiveFireReaction},}
 reactionDamage[unitAliases.B17F.id] ={high = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.B17FdefensiveFireReaction},}
 reactionDamage[unitAliases.B17G.id] ={high = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.B17GdefensiveFireReaction},}
+reactionDamage[unitAliases.MedBombers.id] ={high = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.MedBombersdefensiveFireReaction},}
 
 reactionDamage[unitAliases.Stirling.id] ={night = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.StirlingdefensiveFireReaction},}
 reactionDamage[unitAliases.Halifax.id] ={night = {triggerTypes = reactionGroups.germanInterceptors, damageSchedule = ds.HalifaxdefensiveFireReaction},}
@@ -6971,6 +6977,74 @@ local function reHomePayloadUnit(unit)
     end
 end
 
+-- Escape into Night
+-- This is the code for night fighters and bombers to escape after an attack
+
+-- Compute the fraction of HP, the escape radius is given by the largest key value which is less
+-- than that fraction of hp
+-- e.g. 35% has a radius of 1, 80% has a radius of 2 in the defaultEscapeRadiusHPFraction
+
+local defaultEscapeRadiusHPFraction = gen.makeThresholdTable({[0]=0,[0.25]=1,[0.75]=2,})
+local nightEscapeUnits = {}
+nightEscapeUnits[unitAliases.Stirling.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Halifax.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Lancaster.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Beaufighter.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.MosquitoII.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.MosquitoXIII.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Ju88C.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Ju88G.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.He219.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.He111.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.Do217.id]=defaultEscapeRadiusHPFraction
+nightEscapeUnits[unitAliases.He277.id]=defaultEscapeRadiusHPFraction
+--nightEscapeUnits[unitAliases.]=defaultEscapeRadiusHPFraction
+--nightEscapeUnits[unitAliases.]=defaultEscapeRadiusHPFraction
+
+
+local function escapeIntoNight(winner,loser)
+    if winner.location.z == 2 and (not winner.location.city) and
+        nightEscapeUnits[winner.type.id] then
+        local escapeRadius = nightEscapeUnits[winner.type.id][(winner.hitpoints/(winner.type.hitpoints))]
+        -- if withinRadius is true, then all the squares within the escape radius (including the current location of the winner)
+        -- are equally likely to be chosen for escape
+        -- if withinRadius is false, only the squares exactly the escapeDistance away are considered as places to move
+        local withinRadius = false
+        -- if avoidStacks is true, then an escaping plane will not stack with a friendly unit, unless no other squares are
+        -- available
+        -- if false, then the escaping plane is just as likely to choose a square with a friend as an empty square
+        local avoidStacks = true
+        local potentialEscapeTiles = {}
+        local originalSquare = winner.location
+        if withinRadius then
+            radar.diamond(originalSquare,escapeRadius,potentialEscapeTiles,false)
+        else
+            radar.tileRing(originalSquare,escapeRadius,potentialEscapeTiles,false)
+        end
+        local firstChoiceTiles = {}
+        local secondChoiceTiles = {}
+        for __,tile in pairs(potentialEscapeTiles) do
+            if tile.defender == nil then
+                firstChoiceTiles[#firstChoiceTiles+1] = tile
+            elseif avoidStacks and tile.defender == winner.owner then
+                secondChoiceTiles[#secondChoiceTiles+1] = tile
+            elseif tile.defender == winner.owner then
+                firstChoiceTiles[#firstChoiceTiles+1] = tile
+            end
+        end
+        local destinationTile = originalSquare
+        if #firstChoiceTiles > 0 then
+            destinationTile = firstChoiceTiles[math.random(1,#firstChoiceTiles)]
+        elseif #secondChoiceTiles > 0 then
+            destinationTile = secondChoiceTiles[math.random(1,#secondChoiceTiles)]
+        end
+        if destinationTile ~= originalSquare then
+            -- unit escapes to another tile
+            text.simple("We've attacked an enemy aircraft, but only damaged it! It escapes into the night!")
+            winner:teleport(destinationTile)
+        end
+    end
+end
 
 
 -- ���������� Event Triggers: ��������������������������������������������������������������������������������������������������������������������������������������������
@@ -8075,7 +8149,7 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         -- create Halifaxes
         for i=1,specialNumbers.gomorrahHalifaxes do
             local newHalifax=civ.createUnit(unitAliases.Halifax,tribeAliases.Allies,civ.getTile(181,57,2))
-            newHalifax.homeCity=nil
+            newHalifax.homeCity=cityAliases.London
             newHalifax.veteran = true
         end
     elseif flag("OperationGomorrahActive") then
@@ -8101,7 +8175,7 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         placeGermanTargetIfNecessary("OperationChastise",sTLoc["OperationChastiseLocation3"])
         for i=1,specialNumbers.chastiseLancasters do
            local newLancaster = civ.createUnit(unitAliases.Lancaster,tribeAliases.Allies,civ.getTile(197,63,2))
-            newLancaster.homeCity=nil
+            newLancaster.homeCity=cityAliases.London
             newLancaster.veteran=true
         end
     elseif flag("OperationChastiseActive") then
@@ -8147,7 +8221,7 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         placeGermanTargetIfNecessary("Regensburg",sTLoc["RegensburgLocation"])
         for i=1,specialNumbers.schweinfurtB17F do
             local newB17F = civ.createUnit(unitAliases.B17F,tribeAliases.Allies,civ.getTile(197,63,0))
-            newB17F.homeCity=nil
+            newB17F.homeCity=cityAliases.London
             newB17F.veteran=false
         end
     elseif flag("SchweinfurtRegensburgActive") then
@@ -8179,12 +8253,12 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         text.addToArchive(tribeAliases.Allies,textAliases.hydraText2..finishText,textAliases.hydraText1,textAliases.hydraText1)
         for i=1,specialNumbers.hydraLancasters do
             local newLancaster = civ.createUnit(unitAliases.Lancaster,tribeAliases.Allies,civ.getTile(197,63,2))
-            newLancaster.homeCity=nil
+            newLancaster.homeCity=cityAliases.London
             newLancaster.veteran=false
         end
         for i=1,specialNumbers.hydraHalifaxes do
             local newHalifax=civ.createUnit(unitAliases.Halifax,tribeAliases.Allies,civ.getTile(197,63,2))
-            newHalifax.homeCity = nil
+            newHalifax.homeCity = cityAliases.London
             newHalifax.veteran = false
         end
         placeGermanTargetIfNecessary("OperationHydra",sTLoc["OperationHydraLocation"])
@@ -8219,7 +8293,7 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         placeGermanTargetIfNecessary("OperationJericho",sTLoc["OperationJerichoLocation"])
         for i=1,specialNumbers.jerichoTyphoons do
             local newTyphoon = civ.createUnit(unitAliases.Typhoon,tribeAliases.Allies,civ.getTile(197,63,0)) 
-            newTyphoon.homeCity = nil
+            newTyphoon.homeCity = cityAliases.London
             newTyphoon.veteran = false
         end
     elseif flag("OperationJerichoActive") then
@@ -8240,7 +8314,7 @@ local function alliedHistoricTargetsAfterAlliedProduction()
         placeGermanTargetIfNecessary("OperationCarthage",sTLoc["OperationCarthageLocation"])
         for i=1,specialNumbers.carthageLancasters do
             local newLancaster = civ.createUnit(unitAliases.Lancaster,tribeAliases.Allies,civ.getTile(197,63,2))
-            newLancaster.homeCity=nil
+            newLancaster.homeCity=cityAliases.London
             newLancaster.veteran=false
         end
     elseif flag("OperationCarthageActive") then
@@ -9969,6 +10043,7 @@ civ.scen.onUnitKilled(function (loser, winner)
 		justOnce("AdolfGallandKilled",function () text.displayNextOpportunity({tribeAliases.Allies,tribeAliases.Germans},textAliases.AdolfGallandKilled,"Adolf Galland Killed","Adolf Galland Killed") end)
 		tribeAliases.Germans.money = tribeAliases.Germans.money+specialNumbers.ExpertenKilledMoney
 	end
+    escapeIntoNight(winner,loser)
 	
 end)
 
@@ -10053,8 +10128,14 @@ local function customWeightFunction(unit,activeUnit)
     if unit.type ~= activeUnit.type then
         weight = weight+1
     end
-    if unit.location.z ~= bestMap then
+    if bestMap == 2 then 
+        if unit.location.z ~= 2 then
+            weight = weight+10000
+        end
+    elseif unit.location.z == 2 then
         weight = weight+10000
+    elseif unit.location.z ~= bestMap then
+        weight = weight+20
     end
     weight = weight+math.abs(unit.location.x-activeUnit.location.x)+math.abs(unit.location.y-activeUnit.location.y)
     return weight

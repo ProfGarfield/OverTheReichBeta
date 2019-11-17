@@ -161,8 +161,10 @@ local function placeRadarMarker(tile, radarTribe, markerType, safeTile, removalI
     local nineSafeSquares = {}
     diamond(safeTile,1,nineSafeSquares,false)
     for i=1,9 do
-        for unit in nineSquares[i].units do
-            civ.teleportUnit(unit,nineSafeSquares[i])
+        if nineSquares[i] then
+            for unit in nineSquares[i].units do
+                civ.teleportUnit(unit,nineSafeSquares[i])
+            end
         end
     end
     -- now place the radar marker
@@ -211,8 +213,10 @@ local function removeRadarMarker(tile,markerType,safeTile,removalInfoTable,spott
         local removalInfo = removalInfoTable[tileId]
         if removalInfo then
             for i=1,9 do
-                for unit in nineSquares[i].units do
-                    civ.teleportUnit(unit,nineSafeSquares[i])
+                if nineSquares[i] then
+                    for unit in nineSquares[i].units do
+                        civ.teleportUnit(unit,nineSafeSquares[i])
+                    end
                 end
             end
             -- restore improvements that existed before the radar marker was placed
@@ -332,6 +336,7 @@ end
     
 
 return{removeRadarMarker = removeRadarMarker,
+        tileRing = tileRing,
         radarSweep = radarSweep,
         removeAllRadarMarkers=removeAllRadarMarkers,
         diamond = diamond,
