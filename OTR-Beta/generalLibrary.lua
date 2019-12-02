@@ -129,6 +129,9 @@
 --#gen.inPolygon(tile,tableOfCoordinates)-->bool
 --#gen.cityCanSupportAnotherUnit(city)-->bool
 --#gen.rehomeUnitsInCapturedCity(city,defender) --> void
+--#gen.activate(unit)-->void
+--#gen.activateWithSource(unit,source)-->void
+--#gen.linkActivationFunction(function(unit,source)-->void)-->void
 
 --
 -- FUNCTION IMPLEMENTATIONS
@@ -1096,8 +1099,35 @@ function gen.selectNextActiveUnit(activeUnit,source,customWeightFn)
     end
 end
 
+local activationFunction = function(unit,source) error("Use gen.linkActivationFunction to specify the function to be run when a unit is activated.") end
 
 
+
+-- gen.activate(unit)-->void
+-- use to activate a unit.  This assumes that the 'source' of the activation is true
+-- (i.e. human generated).  Use gen.activateWithSource if false is needed (either sometimes or always)
+function gen.activate(unit)
+    unit:activate()
+    activationFunction(unit,true)
+end
+
+--#gen.activateSource(unit,source)-->void
+-- use to activate a unit and specify the source of the activation
+function gen.activateWithSource(unit,source)
+    unit:activate()
+    activationFunction(unit,source)
+end
+
+--#gen.linkActivationFunction(function(unit,source)-->void)-->void
+-- use to specify the code that should be run when a unit is
+-- activated by gen.activate or gen.activateWtihSource
+function gen.linkActivationFunction(activationFn)
+    if type(activationFn) == "function" then
+        activationFunction = activationFn
+    else
+        error("gen.linkActivationFunction requires a function as the argument.")
+    end
+end
 
 
 

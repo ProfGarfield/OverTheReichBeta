@@ -243,8 +243,9 @@ local function gatherAggressorCombatInfo(tribe)
     local tribeID = tribe.id
     local tribeCombatTable = {}
     local tribeCTIndex = 1
+    local turn = civ.getTurn()
     for index,combatRecord in pairs(combatLog) do
-        if combatRecord.aggressorTribeID == tribeID then
+        if combatRecord.aggressorTribeID == tribeID and combatRecord.turn == turn then
             tribeCombatTable[tribeCTIndex] = combatRecord
             tribeCTIndex=tribeCTIndex+1
         end

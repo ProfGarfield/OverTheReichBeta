@@ -1070,6 +1070,7 @@ end
 -- p.g. Indexed by unittype id.  If entry is true, the unit can use the carrier.  If missing or false, the unit can't.
 -- Any carrier must also be in this list, with entry true
 -- munitions also use carrier, to ensure carrier is not air stack protected by its cargo
+-- munition use is set in the function, not in this table.
 local useCarrier = {}
 useCarrier[unitAliases.Carrier.id] = true
 useCarrier[unitAliases.SpitfireIX.id] = true
@@ -1225,6 +1226,7 @@ local healthMunitionQuantityTable = {
 ["B26"] = {unitType = unitAliases.B26, healthTable = {{.5,1},}},
 ["A26"] = {unitType = unitAliases.A26, healthTable = {{.5,1},{.7,1}}},
 ["MedBombers"] = {unitType = unitAliases.MedBombers, healthTable = {{.3,1},{.7,1}}},
+["Pathfinder"] = {unitType = unitAliases.Pathfinder, healthTable = {{.3,3},{.6,3},{.9,3}}}
 
 -- B17G produces 1 munition by default.  If unit has more than 30% health, give it an extra munition
 -- if it has more than 70% health, give it an extra munition
@@ -1300,11 +1302,11 @@ local artilleryUnitTypes = {
 	["Me109G14"] = { unitType=civ.getUnitType(13), munitionCreated=civ.getUnitType(95), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=5, displayText=nil },
 	["Me109K4"] = { unitType=civ.getUnitType(14), munitionCreated=civ.getUnitType(95), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=12, moneyCostOfMunition=5, displayText=nil },
 	["Fw190A5"] = { unitType=civ.getUnitType(15), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=10, moneyCostOfMunition=5, displayText=nil },
-	["Fw190A8"] = { unitType=civ.getUnitType(16), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=5, displayText=nil },
+	["Fw190A8"] = { unitType=civ.getUnitType(16), munitionCreated=civ.getUnitType(77), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=5, displayText=nil },
 	["Fw190D9"] = { unitType=civ.getUnitType(17), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=12, moneyCostOfMunition=5, displayText=nil },
 	["Ta152"] = { unitType=civ.getUnitType(18), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=13, moneyCostOfMunition=5, displayText=nil },
 	["Me110"] = { unitType=civ.getUnitType(20), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=16, moneyCostOfMunition=5, displayText=nil },
-	["Me410"] = { unitType=civ.getUnitType(21), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=18, moneyCostOfMunition=5, displayText=nil },
+	["Me410"] = { unitType=civ.getUnitType(21), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=18, moneyCostOfMunition=5, displayText=nil,  quantity=2 },
 	["Ju88C"] = { unitType=civ.getUnitType(22), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=10, displayText=nil },
 	["Ju88G"] = { unitType=civ.getUnitType(23), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=12, moneyCostOfMunition=10, displayText=nil },
 	["He219"] = { unitType=civ.getUnitType(24), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=14, moneyCostOfMunition=10, displayText=nil },
@@ -1322,8 +1324,8 @@ local artilleryUnitTypes = {
 	["SpitfireXII"] = { unitType=civ.getUnitType(36), munitionCreated=civ.getUnitType(77), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=5, displayText=nil },
 	["SpitfireXIV"] = { unitType=civ.getUnitType(37), munitionCreated=civ.getUnitType(77), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=12, moneyCostOfMunition=5, displayText=nil },
 	["HurricaneIV"] = { unitType=civ.getUnitType(38), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=8, moneyCostOfMunition=5, displayText=nil,  },
-	["Typhoon"] = { unitType=civ.getUnitType(39), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=10, moneyCostOfMunition=5, displayText=nil },
-	["Tempest"] = { unitType=civ.getUnitType(40), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=13, moneyCostOfMunition=5, displayText=nil },
+	["Typhoon"] = { unitType=civ.getUnitType(39), munitionCreated=civ.getUnitType(77), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=10, moneyCostOfMunition=5, displayText=nil },
+	["Tempest"] = { unitType=civ.getUnitType(40), munitionCreated=civ.getUnitType(77), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=13, moneyCostOfMunition=5, displayText=nil },
 	["Meteor"] = { unitType=civ.getUnitType(41), munitionCreated=civ.getUnitType(97), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=8, moneyCostOfMunition=50, displayText=nil },
 	["Beaufighter"] = { unitType=civ.getUnitType(42), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=11, moneyCostOfMunition=10, displayText=nil },
 	["MosquitoII"] = { unitType=civ.getUnitType(43), munitionCreated=civ.getUnitType(96), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=15, moneyCostOfMunition=10, displayText=nil },
@@ -1340,7 +1342,7 @@ local artilleryUnitTypes = {
 	["Stirling"] = { unitType=civ.getUnitType(59), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=20, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity, payload=true },
 	["Halifax"] = { unitType=civ.getUnitType(60), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=22, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity, payload=true  },
 	["Lancaster"] = { unitType=civ.getUnitType(61), munitionCreated=civ.getUnitType(99), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=25, moneyCostOfMunition=20, displayText=nil, quantity=healthMunitionQuantity, payload=true  },
-	["Pathfinder"] = { unitType=civ.getUnitType(62), munitionCreated=civ.getUnitType(101), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=4, moneyCostOfMunition=0, displayText=nil, payload=true  },
+	["Pathfinder"] = { unitType=civ.getUnitType(62), munitionCreated=civ.getUnitType(101), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=4, moneyCostOfMunition=0, displayText=nil, payload=true,quantity=healthMunitionQuantity },
 	["A20"] = { unitType=civ.getUnitType(63), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=35, moneyCostOfMunition=10, displayText=nil, quantity=1, payload=true  },
 	["B26"] = { unitType=civ.getUnitType(64), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=40, moneyCostOfMunition=10, displayText=nil, quantity=2, payload=true  },
 	["A26"] = { unitType=civ.getUnitType(65), munitionCreated=civ.getUnitType(98), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=45, moneyCostOfMunition=10, displayText=nil, quantity=3, payload=true  },
@@ -1424,7 +1426,7 @@ local secondaryAttackUnitTypes = {
 	--["Light Cruiser"] = { unitType=civ.getUnitType(80), munitionCreated=unitAliases.Flak, allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=2, moneyCostOfMunition=0, displayText=nil },
 	--["Heavy Cruiser"] = { unitType=civ.getUnitType(81), munitionCreated=civ.getUnitType(110), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=4, moneyCostOfMunition=0, displayText=nil },
 	--["Battleship"] = { unitType=civ.getUnitType(82), munitionCreated=civ.getUnitType(110), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=3, moneyCostOfMunition=0, displayText=nil },
-	["Fw190A8"] = { unitType=civ.getUnitType(16), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=32, moneyCostOfMunition=5, displayText=nil, payload=true },
+	["Fw190A8"] = { unitType=civ.getUnitType(16), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=0, moneyCostOfMunition=5, displayText=nil, payload=true },
 	["Me262"] = { unitType=civ.getUnitType(27), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=40, moneyCostOfMunition=50, displayText=nil, payload=true },
 	["FlakTrain"] = { unitType=civ.getUnitType(11), munitionCreated=civ.getUnitType(104), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,  -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115 -114}, movementCostOfMunition=5, moneyCostOfMunition=0, displayText=nil, altMap = 2 },
 }
@@ -2013,7 +2015,7 @@ local OTRUnitTypeTextTable ={
 [unitAliases.Me109G14.id] = [[Escort. Can land on carriers. Primary=light ammo 2x per turn. Fuel cost = 5]],
 [unitAliases.Me109K4.id] = [[Escort. Can land on carriers. Primary=light ammo 2x per turn. Fuel cost = 5]],
 [unitAliases.Fw190A5.id] = [[Primary=medium ammo 3x per turn. Fuel cost = 5]],
-[unitAliases.Fw190A8.id] = [[Primary=medium ammo 3x per turn. Secondary=1x A2A Rockets. Fuel cost = 5]],
+[unitAliases.Fw190A8.id] = [[Primary=heavy gunfire 3x per turn. Secondary=1x A2A Rockets. Fuel cost = 5]],
 [unitAliases.Fw190D9.id] = [[Primary=medium ammo 3x per turn. Fuel cost = 5]],
 [unitAliases.Ta152.id] = [[Primary=medium ammo 3x per turn. Fuel cost = 5]],
 [unitAliases.Me110.id] = [[Primary=Rockets 1x per turn. Bombers won't shoot back. Fuel cost = 10]],
@@ -2032,12 +2034,12 @@ local OTRUnitTypeTextTable ={
 [unitAliases.He277.id] = [[Primary=3x 500lb bomb. Fuel cost = 20]],
 [unitAliases.Arado234.id] = [[Primary=3x 500lb bomb. Fuel cost = 50]],
 [unitAliases.Go229.id] = [[Primary=3x 1000lb bomb. Fuel cost = 50]],
-[unitAliases.SpitfireIX.id] = [[Escort. Can land on carriers. Primary=hispanos 2x per turn. Fuel cost = 5]],
-[unitAliases.SpitfireXII.id] = [[Escort. Can land on carriers. Primary=hispanos 2x per turn. Fuel cost = 5]],
-[unitAliases.SpitfireXIV.id] = [[Escort. Can land on carriers. Primary=hispanos 2x per turn. Fuel cost = 5]],
+[unitAliases.SpitfireIX.id] = [[Escort. Can land on carriers. Primary=heavy gunfire 2x per turn. Fuel cost = 5]],
+[unitAliases.SpitfireXII.id] = [[Escort. Can land on carriers. Primary=heavy gunfire 2x per turn. Fuel cost = 5]],
+[unitAliases.SpitfireXIV.id] = [[Escort. Can land on carriers. Primary=heavy gunfire 2x per turn. Fuel cost = 5]],
 [unitAliases.HurricaneIV.id] = [[Low-alt. Lands on carriers. Primary=2x med. ammo. Second=1x 500lb. Fuel cost = 5]],
-[unitAliases.Typhoon.id] = [[Low-alt. Primary=medium ammo 2x per turn. Secondary=1x 1000lb bomb. Fuel cost = 5]],
-[unitAliases.Tempest.id] = [[Low-alt. Primary=medium ammo 2x per turn. Secondary=2x 10000lb bomb. Fuel cost = 5]],
+[unitAliases.Typhoon.id] = [[Low-alt. Primary=heavy gunfire 2x per turn. Secondary=1x 1000lb bomb. Fuel cost = 5]],
+[unitAliases.Tempest.id] = [[Low-alt. Primary=heavy gunfire 2x per turn. Secondary=2x 10000lb bomb. Fuel cost = 5]],
 [unitAliases.Meteor.id] = [[Jet fighter. Primary=heavy ammo 10x per turn. Fuel cost = 50]],
 [unitAliases.Beaufighter.id] = [[Primary=medium ammo 2x per turn. Fuel cost = 10]],
 [unitAliases.MosquitoII.id] = [[Primary=medium ammo 2x per turn. Secondary=Radar 4x per turn. Fuel cost = 10]],
@@ -3500,6 +3502,40 @@ local function outOfRangeCheck(killedUnit, bomberTable)
     end
     return outOfRange
 end
+
+local function checkIfInOperatingRadius(unit)
+    -- if unit not air, then definitely in radius
+    if unit.type.domain ~= 1 then
+        return true
+    end
+    local maxRadius = physicalRange(unit.type)
+    if unit.type == unitAliases.FifteenthAF or unit.type == unitAliases.RedTails then
+        return maxRadius >= math.floor((math.abs(unit.location.x-345)+math.abs(unit.location.y-145))/2)
+    end
+    if unit.type == unitAliases.Il2 or unit.type == unitAliases.Yak3 then
+        return maxRadius >= math.floor((math.abs(unit.location.x-406)+math.abs(unit.location.y-74))/2)
+    end
+    for city in civ.iterateCities() do
+        if city.owner == unit.owner and city:hasImprovement(improvementAliases.airbase)
+            and maxRadius >= math.floor((math.abs(unit.location.x-city.location.x)+math.abs(unit.location.y-city.location.y))/2) then
+            return true
+        end
+    end
+    if useCarrier[unit.type.id] then
+        for potentialCarrier in civ.iterateUnits() do
+            if potentialCarrier.type == unitAliases.Carrier and potentialCarrier.owner == unit.owner and
+            maxRadius >= math.floor((math.abs(unit.location.x-potentialCarrier.location.x)+math.abs(unit.location.y-potentialCarrier.location.y))/2) then
+                return true
+            end
+        end
+    end
+    return false
+end
+
+
+
+
+
 ------------------------------------------------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------------------------------------------------
 -------------------------------------------------------------------------------------------------------------------------------
@@ -4124,6 +4160,7 @@ ds.B24JdefensiveFireReaction = {{.6, 1},{.4,1},{.1,1},{.05,1}}
 ds.MedBombersdefensiveFireReaction = {{.6, 1},{.4,1},{.1,1},{.05,1}}
 ds.B17FdefensiveFireReaction = {{.8, 2},{.6,2},{.4,2},{.05,2}}
 ds.B17GdefensiveFireReaction = {{.8, 2},{.6,2},{.5,2},{.1,2}}
+--ds.SturmbockReaction = {{.4, 1},{.3,1},{.05,1},{.03,1}}
 
 ds.StirlingdefensiveFireReaction = {{.6, 1},{.4,1},{.05,1}}
 ds.HalifaxdefensiveFireReaction = {{.6, 1},{.4,1},{.05,1}}
@@ -4996,6 +5033,10 @@ local function canReactFunction(triggerUnit,reactingUnit)
     debugPrint(canReact[reactingUnit.type.id])
     debugPrint("reactionEntry")
     debugPrint(reactionEntry)
+    -- check if the unit is within the operating radius
+    if not checkIfInOperatingRadius(reactingUnit) then
+        return false
+    end
     -- check if the unit has used all its reactions
     if reactionEntry.maxAttacks and state.reactions[reactingUnit.id] 
         and reactionEntry.maxAttacks <=state.reactions[reactingUnit.id] then
@@ -6937,7 +6978,7 @@ end
 
 -- automatically reHomes payload aircraft that are activated
 -- in a city, if they currently have no home city
-local function reHomePayloadUnit(unit)
+local function reHomePayloadUnit(unit,suppressMessage)
     if unit.homeCity or (not unit.location.city) then
         return
     end
@@ -6969,10 +7010,12 @@ local function reHomePayloadUnit(unit)
     if gen.cityCanSupportAnotherUnit(unit.location.city) then
         unit.homeCity = unit.location.city
         return
-    else
+    elseif not suppressMessage then
         text.simple("This "..unit.type.name.." has not been automatically re-armed because "..
         unit.location.city.name.." can not support any more units.  This unit can't use its "..attackType..
         " attack until it has a home city.", "Over the Reich Concepts: Munition Payloads")
+        return
+    else
         return
     end
 end
@@ -6984,7 +7027,7 @@ end
 -- than that fraction of hp
 -- e.g. 35% has a radius of 1, 80% has a radius of 2 in the defaultEscapeRadiusHPFraction
 
-local defaultEscapeRadiusHPFraction = gen.makeThresholdTable({[0]=0,[0.25]=1,[0.75]=2,})
+local defaultEscapeRadiusHPFraction = gen.makeThresholdTable({[0]=1,[0.25]=2,[0.75]=3,})
 local nightEscapeUnits = {}
 nightEscapeUnits[unitAliases.Stirling.id]=defaultEscapeRadiusHPFraction
 nightEscapeUnits[unitAliases.Halifax.id]=defaultEscapeRadiusHPFraction
@@ -7002,9 +7045,10 @@ nightEscapeUnits[unitAliases.He277.id]=defaultEscapeRadiusHPFraction
 --nightEscapeUnits[unitAliases.]=defaultEscapeRadiusHPFraction
 
 
-local function escapeIntoNight(winner,loser)
+local overTwoHundred = {}
+function overTwoHundred.escapeIntoNight(winner,loser)
     if winner.location.z == 2 and (not winner.location.city) and
-        nightEscapeUnits[winner.type.id] then
+        nightEscapeUnits[winner.type.id] and (not(loser.type == unitAliases.Flak or loser.type == unitAliases.LightFlak)) then
         local escapeRadius = nightEscapeUnits[winner.type.id][(winner.hitpoints/(winner.type.hitpoints))]
         -- if withinRadius is true, then all the squares within the escape radius (including the current location of the winner)
         -- are equally likely to be chosen for escape
@@ -7046,6 +7090,61 @@ local function escapeIntoNight(winner,loser)
     end
 end
 
+-- GOTO hotkey gotohotkey gotohotkeys goto hotkeys
+function overTwoHundred.setGoToHotKey()
+    if civ.getActiveUnit() then
+        return
+    end
+    state.hotkeys = state.hotkeys or {}
+    for tribe = 0,7 do
+        state.hotkeys[tribe] = state.hotkeys[tribe] or {}
+    end
+    local destinationTile = civ.getCurrentTile()
+
+    local menuText = "Set the tile ("..tostring(destinationTile.x)..
+    ","..tostring(destinationTile.y)..") as the goto destination for the active unit when the following key is pressed:"
+    local menuTable = {}
+    local function hotkeyValToString(hotkeyVal)
+        if hotkeyVal then
+            return ", currently set to ("..tostring(hotkeyVal[1])..","..tostring(hotkeyVal[2])..")"
+        else
+            return ""
+        end
+    end
+    menuTable[7] = "Key 7"..hotkeyValToString(state.hotkeys[civ.getCurrentTribe().id][7])
+    menuTable[8] = "Key 8"..hotkeyValToString(state.hotkeys[civ.getCurrentTribe().id][8])
+    menuTable[9] = "Key 9"..hotkeyValToString(state.hotkeys[civ.getCurrentTribe().id][9])
+    menuTable[20] = "Don't set a hotkey."
+    menuTable[21] = "Clear all hotkeys."
+    choice = text.menu(menuTable,menuText,"GOTO Hotkeys")
+    if choice == 20 then
+        return
+    elseif choice == 21 then
+        state.hotkeys[civ.getCurrentTribe().id][7]=nil
+        state.hotkeys[civ.getCurrentTribe().id][8]=nil
+        state.hotkeys[civ.getCurrentTribe().id][9]=nil
+        return
+    end
+    state.hotkeys[civ.getCurrentTribe().id][choice]={destinationTile.x,destinationTile.y}
+    return
+end
+
+function overTwoHundred.useGoToHotKey(numberKey)
+    if not civ.getActiveUnit() then
+        return
+    end
+    local currentUnit = civ.getActiveUnit()
+    state.hotkeys = state.hotkeys or {}
+    for tribe = 0,7 do
+        state.hotkeys[tribe] = state.hotkeys[tribe] or {}
+    end
+    local hotkeyDest =  state.hotkeys[currentUnit.owner.id][numberKey]
+    if hotkeyDest then
+        currentUnit.gotoTile = civ.getTile(hotkeyDest[1],hotkeyDest[2],currentUnit.location.z)
+    else
+        text.simple("The key "..tostring(numberKey).." is not set as a goto hotkey.","GOTO Hotkeys")
+    end
+end
 
 -- ���������� Event Triggers: ��������������������������������������������������������������������������������������������������������������������������������������������
 
@@ -7275,7 +7374,7 @@ end) --End function and onCityTaken
 
 
 
-local function isDirectionKey(keyID)
+function overTwoHundred.isDirectionKey(keyID)
     if keyID >= 192 and keyID <=199 then
         return true
     elseif keyID >= 161 and keyID <= 169 and keyID ~= 165 then
@@ -7287,8 +7386,72 @@ local function isDirectionKey(keyID)
     end
 end
 
+local lastKeyPAndActiveUnit = false
+
+function overTwoHundred.goInDirection(unit,keyID)
+    -- the unit will move until it has 2 movement points left
+    -- if porting this code, you will need to account for totpp.movementMultipliers.aggregate
+    local maxDistance = unit.type.move-unit.moveSpent-2
+    local startTile = unit.location
+    local destinationTile = startTile
+    local bestValidDestination = startTile
+    local distance = 0
+    while (destinationTile and (destinationTile.city == nil)) and distance <= maxDistance +1 do
+        bestValidDestination = destinationTile
+        if keyID == 192 or keyID == 168 then
+        -- up (smaller y)
+            destinationTile = civ.getTile(startTile.x,startTile.y-2*distance,startTile.z)
+        elseif keyID == 193 or keyID == 162 then
+        -- down (bigger y)
+            destinationTile = civ.getTile(startTile.x,startTile.y+2*distance,startTile.z)
+        elseif keyID == 194 or keyID == 164 then
+        -- left (smaller x)
+            destinationTile = civ.getTile(startTile.x-2*distance,startTile.y,startTile.z)
+        elseif keyID == 195 or keyID == 166  then
+        -- right (bigger x)
+            destinationTile = civ.getTile(startTile.x+2*distance,startTile.y,startTile.z)
+        elseif keyID == 197 or keyID == 169  then
+        -- up-right smaller y, bigger x
+            destinationTile = civ.getTile(startTile.x+distance,startTile.y-distance,startTile.z)
+        elseif keyID == 196 or keyID == 167  then
+        -- up-left smaller y smaller x
+            destinationTile = civ.getTile(startTile.x-distance,startTile.y-distance,startTile.z)
+        elseif keyID == 198 or keyID == 163  then
+        -- down right bigger y bigger x
+            destinationTile = civ.getTile(startTile.x+distance,startTile.y+distance,startTile.z)
+        elseif keyID == 199 or keyID == 161  then
+        -- down left bigger y smaller x
+            destinationTile = civ.getTile(startTile.x-distance,startTile.y+distance,startTile.z)
+        end
+        distance = distance +1
+        -- want to choose a goto tile that isn't a city (so that plane doesn't land in urban center)
+        -- and also want to choose a tile on the map
+    end
+    unit.gotoTile = bestValidDestination
+end
+
 ------------------------------------------------------------------------------------------------------------------------------------------------
 civ.scen.onKeyPress(function(keyID)
+    if civ.getActiveUnit() and keyID == 80 --[[p]] then
+        lastKeyPAndActiveUnit = true
+        
+        return
+        -- return so that lastKeyPAndActiveUnit is not set to false
+    end
+    if lastKeyPAndActiveUnit and civ.getActiveUnit() then
+        overTwoHundred.goInDirection(civ.getActiveUnit(),keyID)
+    end
+    lastKeyPAndActiveUnit = false
+    if keyID == 48 --[[zero above keys]] then
+        overTwoHundred.setGoToHotKey()
+    end
+    if keyID == 55 --[[seven]] then
+        overTwoHundred.useGoToHotKey(7)
+    elseif keyID == 56 --[[8]] then
+        overTwoHundred.useGoToHotKey(8)
+    elseif keyID == 57 --[[9]] then
+        overTwoHundred.useGoToHotKey(9)
+    end
     if keyID == specialNumbers.reportKeyID then
         -- activate the log report
         return log.combatReportFunction()
@@ -7321,7 +7484,7 @@ civ.scen.onKeyPress(function(keyID)
             civ.createUnit(unitAliases.AlliedArmyGroup,civ.getCurrentTribe(),civ.getCurrentTile()) --]]
     end
     -- formation flying
-    if state.formationFlag == true and isDirectionKey(keyID) and civ.getActiveUnit()  then
+    if state.formationFlag == true and overTwoHundred.isDirectionKey(keyID) and civ.getActiveUnit()  then
         state.formationFlag = formation.moveFormation(state.formationTable,keyID,state.formationFlag)
     end
     if keyID == specialNumbers.formationKeyID and civ.getActiveUnit() then
@@ -7427,6 +7590,14 @@ civ.scen.onKeyPress(function(keyID)
                     elseif currentUnit.location.z == 1 and secondAttackUnit.highAltNoAttack then
                         enoughMoney = 0
                         civ.ui.text("This unit can't make its secondary attack at high altitude.")
+                    elseif not checkIfInOperatingRadius(currentUnit) then
+                        enoughMoney = 0
+                        local operatingRadiusMessage = "This "..currentUnit.type.name.." unit is outside its maximum operating radius.  It will not fire munitions, perform reactive attacks, or even defend itself in combat until it is brought nearer an airbase"
+                        if useCarrier[currentUnit.type.id] then
+                            operatingRadiusMessage = operatingRadiusMessage.." (or carrier)"
+                        end
+                        operatingRadiusMessage = operatingRadiusMessage..".  Units can't be ordered into combat missions without the ability to return to base.  A unit's operating radius is its per turn movement multiplied by half its range (rounded down if the range is odd).  This unit has an operating radius of "..tostring(physicalRange(currentUnit.type)).."."
+                        text.simple(operatingRadiusMessage,"Over the Reich Concepts: Operating Radius")
                     end
 					if correctTerrain == 1 and enoughMoney == 1 then
 					    -- p.g. code for extra functionality
@@ -7564,6 +7735,14 @@ civ.scen.onKeyPress(function(keyID)
                 elseif currentUnit.location.z == 0 and artilleryUnit.lowAltNoAttack then
                     enoughMoney = 0
                     civ.ui.text("This unit can't use its primary attack at low altitude.")
+                elseif not checkIfInOperatingRadius(currentUnit) then
+                    enoughMoney = 0
+                    local operatingRadiusMessage = "This "..currentUnit.type.name.." unit is outside its maximum operating radius.  It will not fire munitions, perform reactive attacks, or even defend itself in combat until it is brought nearer an airbase"
+                    if useCarrier[currentUnit.type.id] then
+                        operatingRadiusMessage = operatingRadiusMessage.." (or carrier)"
+                    end
+                    operatingRadiusMessage = operatingRadiusMessage..".  Units can't be ordered into combat missions without the ability to return to base.  A unit's operating radius is its per turn movement multiplied by half its range (rounded down if the range is odd).  This unit has an operating radius of "..tostring(physicalRange(currentUnit.type)).."."
+                    text.simple(operatingRadiusMessage,"Over the Reich Concepts: Operating Radius")
                 end
 			    if correctTerrain == 1 and enoughMoney == 1 then
 			        -- p.g. some changes made for extra functionality
@@ -7767,7 +7946,7 @@ civ.scen.onLoad(function (buffer)
 	unitAliases.HermannGraf.nativeTransport = 1
 	unitAliases.JosefPriller.nativeTransport = 1
 	unitAliases.AdolfGalland.nativeTransport = 1
-	unitAliases.hwSchnaufer.nativeTransport = 0
+	unitAliases.hwSchnaufer.nativeTransport = 1
 	unitAliases.Flak.nativeTransport = 1 
 	state.radarRemovalInfo = state.radarRemovalInfo or {}
 	if radar.radarMarkerOnMap(radarMarkerType) then
@@ -7942,8 +8121,8 @@ sTNum["SchweinfurtRegensburgWindow"]=12--2
 sTNum["OperationHydraFirstTurn"]=30--2
 sTNum["OperationHydraLastTurn"]=60--2
 sTNum["OperationHydraWindow"]=8--2
-sTNum["BattleOfBerlinFirstTurn"]=50--2
-sTNum["BattleOfBerlinLastTurn"]=100--2
+sTNum["BattleOfBerlinFirstTurn"]=150--2-- 50 before event removed
+sTNum["BattleOfBerlinLastTurn"]=200--2 -- 100 before event removed
 sTNum["BattleOfBerlinWindow"]=specialNumbers.battleOfBerlinLength --2
 sTNum["OperationJerichoMinAlliedScore"]=800--9
 sTNum["OperationJerichoChanceEachTurn"]=0.1--.5
@@ -9785,12 +9964,19 @@ local function afterProduction(turn,tribe)
     if turn == 1 then
         text.simple("Make sure you set the 'Always wait at end of turn.' game option.")
     end
+    for unit in civ.iterateUnits() do
+        if unit.owner == tribe then
+            reHomePayloadUnit(unit,true)
+        end
+    end
 end
 console.afterProduction = function() afterProduction(civ.getTurn(),civ.getCurrentTribe()) end
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
+local firstCombatRound = true
 civ.scen.onUnitKilled(function (loser, winner)
+    firstCombatRound = true
     --resetProductionValues()
     log.onUnitKilled(winner,loser)
     --cr.addCombatEntry(state.cHistTable,loser,winner)
@@ -10043,7 +10229,7 @@ civ.scen.onUnitKilled(function (loser, winner)
 		justOnce("AdolfGallandKilled",function () text.displayNextOpportunity({tribeAliases.Allies,tribeAliases.Germans},textAliases.AdolfGallandKilled,"Adolf Galland Killed","Adolf Galland Killed") end)
 		tribeAliases.Germans.money = tribeAliases.Germans.money+specialNumbers.ExpertenKilledMoney
 	end
-    escapeIntoNight(winner,loser)
+    overTwoHundred.escapeIntoNight(winner,loser)
 	
 end)
 
@@ -10323,36 +10509,45 @@ local function ineffectiveAAMunitionMessage(attacker,defender)
 end
 
 local function combatResolutionFunction(defaultResolutionFunction,defender,attacker)
-    if AAMunitionsTable[attacker.type.id] and AAInvulnerableTable[defender.type.id] then
-        attacker.damage = attacker.type.hitpoints
-        ineffectiveAAMunitionMessage(attacker,defender)
-        return false
-    elseif attacker.location.z == 2 then
-        local aType = attacker.type
-        local dType = defender.type
-        if (aType == unitAliases.TwoHundredFiftylb or aType == unitAliases.FiveHundredlb
-            or aType == unitAliases.Thousandlb ) 
-            and not(dType == unitAliases.SpecialTarget
-            or dType == unitAliases.Urban1 or dType == unitAliases.Urban2
-            or dType == unitAliases.Urban3 or dType == unitAliases.GermanLightFlak
-			or dType == unitAliases.AlliedLightFlak) then
+    if firstCombatRound then
+        firstCombatRound = false
+        if AAMunitionsTable[attacker.type.id] and AAInvulnerableTable[defender.type.id] then
             attacker.damage = attacker.type.hitpoints
-            local message = "At night, bombs are not accurate enough to damage most targets.  They can be "..
-            "used against Urban and Special Targets, as well as "..unitAliases.GermanLightFlak.name.." and "..
-            unitAliases.AlliedLightFlak.name..".  No damage was done to the "..defender.type.name.."."
-            text.simple(message,"Over the Reich Concepts: Ineffective Munitions")
+            ineffectiveAAMunitionMessage(attacker,defender)
             return false
-        elseif (aType == unitAliases.V2 or aType == unitAliases.V1)  
-            and not(dType == unitAliases.SpecialTarget
-            or dType == unitAliases.Urban1 or dType == unitAliases.Urban2
-            or dType == unitAliases.Urban3) then
-            attacker.damage = attacker.type.hitpoints
-            local message = "%STRING1 units and %STRING2 units are not accurate"..
-            " enough to target anything smaller than a city.  Use them against Urban or Special Targets."..
-            "  No damage was done to the %STRING3."
-            text.simple(text.substitute(message,{unitAliases.V1.name,unitAliases.V2.name,defender.type.name}),
-                "Over the Reich Concepts: Ineffective Munitions")
+        elseif not checkIfInOperatingRadius(defender) then
+            -- units outside the operating radius don't defend themselves
+            local messageBody = "Last turn, a "..defender.type.name.." was stationed beyond its maximum operating radius and was attacked.  The unit did not defend itself in combat and was defeated.  Units can't be ordered into combat missions (including firing munitions or making reactive attacks) without the ability to return to base.  A unit's operating radius is its per turn movement multiplied by half its range (rounded down if the range is odd).  A "..defender.type.name.." has an operating radius of "..tostring(physicalRange(defender.type)).."."
+            text.displayNextOpportunity(defender.owner,messageBody,"Over the Reich Concepts: Operating Radius","Over the Reich Concepts: Operating Radius")
+            defender.damage = defender.type.hitpoints
             return false
+        elseif attacker.location.z == 2 then
+            local aType = attacker.type
+            local dType = defender.type
+            if (aType == unitAliases.TwoHundredFiftylb or aType == unitAliases.FiveHundredlb
+                or aType == unitAliases.Thousandlb ) 
+                and not(dType == unitAliases.SpecialTarget
+                or dType == unitAliases.Urban1 or dType == unitAliases.Urban2
+                or dType == unitAliases.Urban3 or dType == unitAliases.GermanLightFlak
+        		or dType == unitAliases.AlliedLightFlak) then
+                attacker.damage = attacker.type.hitpoints
+                local message = "At night, bombs are not accurate enough to damage most targets.  They can be "..
+                "used against Urban and Special Targets, as well as "..unitAliases.GermanLightFlak.name.." and "..
+                unitAliases.AlliedLightFlak.name..".  No damage was done to the "..defender.type.name.."."
+                text.simple(message,"Over the Reich Concepts: Ineffective Munitions")
+                return false
+            elseif (aType == unitAliases.V2 or aType == unitAliases.V1)  
+                and not(dType == unitAliases.SpecialTarget
+                or dType == unitAliases.Urban1 or dType == unitAliases.Urban2
+                or dType == unitAliases.Urban3) then
+                attacker.damage = attacker.type.hitpoints
+                local message = "%STRING1 units and %STRING2 units are not accurate"..
+                " enough to target anything smaller than a city.  Use them against Urban or Special Targets."..
+                "  No damage was done to the %STRING3."
+                text.simple(text.substitute(message,{unitAliases.V1.name,unitAliases.V2.name,defender.type.name}),
+                    "Over the Reich Concepts: Ineffective Munitions")
+                return false
+            end
         end
     end
     local dType = defender.type

@@ -910,7 +910,7 @@ This WoW is not in this scenario.
 74,	;	Allied Infantry
 75,	;	Allied Tanks
 76,	;	Sunderland
-77,	;	Hispanos
+77,	;	Heavy Gunfire
 78,	;	Hermann Graf
 79,	;	Josef Priller
 80,	;	Adolf Galland
@@ -1034,7 +1034,7 @@ The Fw190 is Germany's main daylight interceptor.  It carries medium guns and ca
 
 @@16 Fw190A8
 
-The Fw190 is Germany's main daylight interceptor, and the Fw190A8 expands on its arsenal.  It carries medium guns and can fire them 3 times per turn by pressing "k," or it can fire one set of air-to-air rockets per turn by pressing "backspace."  Unlike a bomber destroyer, bombers will still defend against rocket attacks  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Fw190A8 can make up to 2 reactive attacks at a range of 1, and will have better success reacting against bombers than fighters.  It will also have better success reacting at low altitude than high altitude, as the type was a poor-performer at high altitudes historically.
+The Fw190 is Germany's main daylight interceptor, and the Fw190A8 expands on its arsenal.  It carries heavy gunfire and can fire them 3 times per turn by pressing "k," or it can fire one set of air-to-air rockets per turn by pressing "backspace."  Unlike a bomber destroyer, bombers will still defend against rocket attacks, but the Fw190A8 can make this attack at no cost to its movement points.  The rockets are a payload attack, meaning it can only use them once per sortie and must then rearm at an airbase.  It is not as good defensively as the Me109 so it should use its speed to advantage or work in pairs with escorts.  Attacks cost five fuel points each.  This unit cannot land in population centers - only airfields.  Defensively, the Fw190A8 can make up to 2 reactive attacks at a range of 1, and will have better success reacting against bombers than fighters.  It will also have better success reacting at low altitude than high altitude, as the type was a poor-performer at high altitudes historically.  It has a substantially increased cost over the Fw190A5 due to its increased armament.  
 
 @@17 Fw190D9
 
@@ -1110,15 +1110,15 @@ German strategic jet bomber.  Carries 3x1,000lb bombs and can attack 10 times at
 
 @@35 Spitfire IX
 
-The Spitfire is a good all-around aircraft for the Allies, though it has very short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home. It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry hispanos, making it better at attacking enemy aircraft than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 1.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.
+The Spitfire is a good all-around aircraft for the Allies, though it has very short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home. It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry heavy gunfire, making it better at attacking enemy defensive aircraft (such as the Me109 series) than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 1.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.  
 
 @@36 Spitfire XII
 
-The Spitfire is a good all-around aircraft for the Allies, though it has short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home. It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry hispanos, making it better at attacking enemy aircraft than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 2.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.
+The Spitfire is a good all-around aircraft for the Allies, though it has short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home. It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry heavy gunfire, making it better at attacking enemy defensive aircraft (such as the Me109 series) than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 2.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.
 
 @@37 Spitfire XIV
 
-The Spitfire is a good all-around aircraft for the Allies, though it has short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry hispanos, making it better at attacking enemy aircraft than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 3.  It is quite good at reactive attacks at high altitude.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.
+The Spitfire is a good all-around aircraft for the Allies, though it has short range.  Be careful as it can move over the course of three turns, which can leave it short of gas to return home.  It has decent defense stats and can serve as an escort, but also is one of the few Allied aircraft to carry heavy gunfire, making it better at attacking enemy defensive aircraft (such as the Me109 series) than most American fighters.  It can work well as part of an escort but its short range will limit its usefulness before closer bases are established on the continent.  It can fire two times per turn at a cost of 5 fuel points per attack.  This unit cannot land in population centers - only airfields.  Defensively, it will reactively intercept enemies up to 2 times at a range of 3.  It is quite good at reactive attacks at high altitude.  The Spitfire series are the only Allied fighters that can land on aircraft carriers.
 
 @@38 Hurricane IV
 
@@ -1183,7 +1183,7 @@ A versatile American escort plane that can also be a fighter-bomber.  It has a h
 
 @@52 P-47D40
 
-A versatile American escort plane that can also be a fighter-bomber.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is 2x1000lb bombs which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 3.  It has better reaction attacks at high altitude and has a very powerful dive bonus.  It struggles at low altitude.
+A versatile American escort plane that can also be a fighter-bomber.  Its primary attack consists of light guns which can be fired twice per turn.  Its secondary attack is 2x500lb bombs which can be dropped once per sortie.  All attacks cost 5 fuel points.  It has a further advantage over other fighter-bombers in that it can climb to high-altitude with its last movement point after an attack, thus making it more survivable.  This unit cannot land in population centers - only airfields in the United Kingdom.  Defensively, it can react 2 times at a range of 3.  It has better reaction attacks at high altitude and has a very powerful dive bonus.  It struggles at low altitude.
 
 @@53 SAVE
 
@@ -1287,9 +1287,9 @@ When a Battle Group is destroyed, there is a chance that survivors will regroup 
 
 This long-range aircraft can only fly at low-altitude by day and is meant to locate German "wolf packs" and other naval vessels so that the Royal Navy can chase them down and destroy them.  It can also attack targets itself as it carries 1x 250lb bomb.  An attack run will reduce its movement points to 1, leaving it very vulnerable to nearby German fighters.  Attacks cost 20 fuel points.  This unit cannot land in population centers - only airfields in the United Kingdom.  This unit will react defensively to German U-Boats and attempt to sink them.
 
-@@77 Hispanos
+@@77 Heavy Gunfire
 
-Spitfires have one of the most powerful attacks in the game.  They are able to fire hispano cannons which can cut through enemy aircraft.  Unfortunately, the Spitfire's range limits the use of these.  
+Several aircraft have very heavy gunfire in the scenario.  The Spitfire series has it because they had hispanos historically, which were outstanding weapons, and also because this gives them a reason to be produced (to take on German fighters like the Me109 that have high defensive attributes).  The Fw190A8 has it because it is meant to saw through bombers.  The Typhoons and Tempests have them as they are outstanding low altitude fighters.
 
 @@78 Hermann Graf
 

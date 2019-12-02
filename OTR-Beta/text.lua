@@ -351,7 +351,7 @@ local function displayAccumulatedMessages()
     local pendingMessagesTable = textState.pendingMessages[tribeID]
     for i=1,#pendingMessagesTable do
         local message = pendingMessagesTable[i]
-        if civ.getCurrentTribe().isHuman or message.broadcast then
+        if civ.getCurrentTribe() == civ.getPlayerTribe() or message.broadcast then
             simple(message.messageBody,message.messageTitle)
         end
         if message.archiveTitle then
