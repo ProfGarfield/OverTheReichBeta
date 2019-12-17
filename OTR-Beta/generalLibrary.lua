@@ -1056,6 +1056,7 @@ function gen.selectNextActiveUnit(activeUnit,source,customWeightFn)
     local bestWaitingValue = math.huge
     local bestNotWaitingUnit = nil
     local bestNotWaitingValue = math.huge
+    local gotoUnitWithMovementLeft = false
     local function defaultWeightFunction(unit,activeUnit)
         local weight = 0
         if unit.type ~= activeUnit.type then
@@ -1069,23 +1070,33 @@ function gen.selectNextActiveUnit(activeUnit,source,customWeightFn)
     end
     customWeightFn = customWeightFn or defaultWeightFunction
 
+
     local activeTribe = civ.getCurrentTribe()
     for unit in civ.iterateUnits() do
-        if unit.owner== activeTribe and moveRemaining(unit) > 0 and unit ~=activeUnit and unit.order & 0xFF == 0xFF then
-            gen.setToWaiting(unit)
-            if waitingUnits[unit.id] and customWeightFn(unit,activeUnit) < bestWaitingValue then
-                bestWaitingUnit = unit
-                bestWaitingValue = customWeightFn(unit,activeUnit)
-            end
-            if not waitingUnits[unit.id] and customWeightFn(unit,activeUnit) < bestNotWaitingValue then
-                
-                bestNotWaitingUnit = unit
-                bestNotWaitingValue = customWeightFn(unit,activeUnit)
+        if unit.owner== activeTribe and moveRemaining(unit) > 0 and unit ~=activeUnit then
+            if unit.order & 0xFF == 0xFF then
+                gen.setToWaiting(unit)
+                if waitingUnits[unit.id] and customWeightFn(unit,activeUnit) < bestWaitingValue then
+                    bestWaitingUnit = unit
+                    bestWaitingValue = customWeightFn(unit,activeUnit)
+                end
+                if not waitingUnits[unit.id] and customWeightFn(unit,activeUnit) < bestNotWaitingValue then
+                    
+                    bestNotWaitingUnit = unit
+                    bestNotWaitingValue = customWeightFn(unit,activeUnit)
+                end
+            elseif unit.gotoTile then
+                gotoUnitWithMovementLeft=true
             end
         end
     end
     if not (bestNotWaitingUnit or bestWaitingUnit) then
         -- only one active unit left
+        return
+    end
+    if gotoUnitWithMovementLeft then
+        -- we want to process all units with goto orders first
+        -- so don't clear the 'wait' command for any unit
         return
     end
     if not bestNotWaitingUnit then

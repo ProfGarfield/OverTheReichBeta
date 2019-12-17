@@ -1,6 +1,7 @@
 -- This is only intended for Over the Reich 3.  While this may provide a template for
 -- formations in other use cases, some things done are specifically for Over the Reich.
 
+local text=require("text")
 
 --- adds tile (x,y,z) to tileTable if that tile exists
 -- if allMaps is true, adds tile (x,y) for maps 0-3 if they exist
@@ -56,7 +57,7 @@ local function diamond(centerTile,dist,tileTable,allMaps)
         tileRing(centerTile,i,tileTable,allMaps)
     end
 end
--- formationTable gives all the unit ids in the current formation
+-- formationTable gives all the units in the current formation
 -- formationTable[0] gives the formation 'leader''s id, the unit the player will
 -- actually control on the map
 
@@ -65,6 +66,66 @@ local function emptyTable(table)
         table[index] = nil
     end
 end
+
+-- don't need, since it only makes sense to keep leader's unit type in the formation
+--local function keepOneUnitInFormation(formationTable)
+--    local unitTypeIDTable = {}
+--    for index,unit in pairs(formationTable) do
+--        -- add 1 to the unit type ids, so that the lowest value will be 2 (since 
+--        -- text.menu doesn't deal with options less than 1)
+--        if index > 0 then
+--            unitTypeIDTable[unit.type.id+2] = unit.type.name
+--        end
+--    end
+--    local choice = text.menu(unitTypeIDTable,"What unit type should we in the formation?","Formation",true)
+--    if choice == 0 then
+--        return
+--    end
+--    local unitTypeToKeep = civ.getUnitType(choice-2)
+--    for key,unit in pairs(formationTable) do
+--        if key>0 unit.type ~= unitTypeToKeep then
+--            formationTable[key]=nil
+--        end
+--    end
+--end
+local function dropUnitTypesFromFormation(formationTable)
+    local unitTypeIDTable = {}
+    local leaderUnitType = formationTable[0].type
+    for key,unit in pairs(formationTable) do
+        -- add 1 to the unit type ids, so that the lowest value will be 2 (since 
+        -- text.menu doesn't deal with options less than 1)
+            -- key>0 ensures that the leader and the leaders last tile are not 'visited'
+        if key > 0 then
+            unitTypeIDTable[unit.type.id+2] = unit.type.name
+        end
+    end
+    -- don't want to remove the leader and the leader's type from the formation
+    unitTypeIDTable[leaderUnitType.id+2] = nil
+    unitTypeIDTable[1] = "Keep only "..leaderUnitType.name.." units in formation."
+    local choice = text.menu(unitTypeIDTable,"What unit type should we drop from the formation?","Formation",true)
+    if choice == 0 then
+        return
+    end
+    if choice == 1 then
+        local unitTypeToKeep = formationTable[0].type
+        for key,unit in pairs(formationTable) do
+            -- key>0 ensures that the leader and the leaders last tile are not 'visited'
+            if key>0 and unit.type ~= unitTypeToKeep then
+                formationTable[key]=nil
+            end
+        end
+        return
+    end
+    local unitTypeToEliminate = civ.getUnitType(choice-2)
+    for key,unit in pairs(formationTable) do
+            -- key>0 ensures that the leader and the leaders last tile are not 'visited'
+        if key>0 and unit.type == unitTypeToEliminate then
+            formationTable[key] = nil
+        end
+    end
+end
+
+
 
 -- returns the new value for inFormationMode
 local function getFormation(unit,formationTable,inFormationMode)
@@ -82,8 +143,9 @@ local function getFormation(unit,formationTable,inFormationMode)
 	formationDialog:addText("What units should be in this formation?")
 	if inFormationMode then
 		formationDialog:addOption("Keep the formation as it is.",-1)
+        formationDialog:addOption("Drop unit types from the formation.",-2)
 	else
-		formationDialog:addOption("Do not make a formation.",-2)
+		formationDialog:addOption("Do not make a formation.",-3)
 	end
 	formationDialog:addOption(domainName.." units on this square.",0)
 	formationDialog:addOption(domainName.." units within one square.",1)
@@ -91,12 +153,15 @@ local function getFormation(unit,formationTable,inFormationMode)
 	formationDialog:addOption(domainName.." units within three squares.",3)
 	formationDialog:addOption(domainName.." units within four squares.",4)
 	if inFormationMode then
-		formationDialog:addOption("Break up the formation.",-3)
+		formationDialog:addOption("Break up the formation.",-4)
 	end
 	selection = formationDialog:show()
 	if selection == -1 then
 		return true
-	elseif selection <= -2 then
+    elseif selection == -2 then
+        dropUnitTypesFromFormation(formationTable)
+        return true
+	elseif selection <= -3 then
 		emptyTable(formationTable)
 		return false
 	else
@@ -267,6 +332,10 @@ local function moveToTile(formationTable, fTableKey, keyID)
 			return
 		elseif movePointsLeft(unit) <= 1 then
 			-- air units must have at least 2 move points to stay in formation
+            if movePointsLeft(unit) == 1 then
+                -- air unit has a movement point left, so we'll give it the goto order to the destination
+                unit.gotoTile = destination
+            end
 			formationTable[fTableKey] = nil
 			return
 		else

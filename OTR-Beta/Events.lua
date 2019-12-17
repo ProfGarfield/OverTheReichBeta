@@ -140,6 +140,8 @@ state.stormInfoTable = state.stormInfoTable or {}
 state.map1FrontStatisticsTable = state.map1FrontStatisticsTable or {}
 state.map2FrontStatisticsTable = state.map2FrontStatisticsTable or {}
 state.mostRecentMunitionUserID = state.mostRecentMunitionUserID or 0
+state.alliedReinforcementTrack = state.alliedReinforcementTrack or {}
+state.alliedReinforcementsSent = state.alliedReinforcementsSent or 0
 
 -- generate the weather Engine
 --local updateClouds = clouds.generateWeatherUpdateFunction(state.mapStorageTable,state.stormInfoTable,state.map1FrontStatisticsTable,state.map2FrontStatisticsTable)
@@ -238,7 +240,9 @@ end
 function console.updateAllWeather()
     clouds.updateAllWeather(state.mapStorageTable,state.stormInfoTable,clouds.catInfoTable,state.map1FrontStatisticsTable,state.map2FrontStatisticsTable)
 end
-
+-- a table to put extra variables in, since we've reached 200 locals in the main function
+local overTwoHundred = {}
+overTwoHundred.currentUnitGotoOrder = nil
 -- However, in some situations, it may be necessary/desirable to
 --g initalize some variables/flags in state so they are never nil
 
@@ -383,7 +387,7 @@ specialNumbers.maxAlliedPorts = 13
 specialNumbers.extraUBoatLoss = 0 -- Counts as extra enemy cities when determining chance of u-boat returning to port.
 specialNumbers.maxFriendlyFire = 0.25 -- Friendly fire damage can be at most this fraction of damage done to enemy (predicted) or unit won't react.  Set to 0 to never fire when friendly units could be caught in the crossfire.
 specialNumbers.beachLandingMoves = 2 -- maximum movement a unit with beachUnloadPenalty Status can have after unloading from a ship
-specialNumbers.maxMunitionDamageToArmyGroup = 10 -- Munitions can't damage Army Groups and Depleted Army Groups if they already have this much damage (8 damage might be increased to 12 damage before this kicks in, however, for example)
+specialNumbers.maxMunitionDamageToArmyGroup = 15 -- Munitions can't damage Army Groups and Depleted Army Groups if they already have this much damage (8 damage might be increased to 12 damage before this kicks in, however, for example)
 specialNumbers.armyGroupOccupationValue = 1 -- value in the german occupation score of having an army unit in france
 specialNumbers.batteredArmyGroupOccupationValue = 1 -- value in germano occupation score of having a battered army group in france
 
@@ -404,6 +408,16 @@ specialNumbers.trainliftCostPerTile = 2 -- cost for each tile traversed by train
 
 specialNumbers.ExpertenKilledMoney = -500
 specialNumbers.refineryKilledMoney = -100
+specialNumbers.moneySafeFromRefineryKill = 500
+specialNumbers.alliedReinforcementGermanPortPenalty = 0.5 -- Every time a depleted battle group is sent to Europe to reinforce Allied losses, this number is added to the number of German ports for the purposes of Battle of the Atlantic calculations.  1 port is roughly 1/2 train per turn
+specialNumbers.alliedReinforcementDelay = 10
+local reinforcementLocations = {}
+reinforcementLocations.AlliedBattleGroups = {{110,72,0},{139,65,0}, {140,44,0}, {137,11,0}}
+reinforcementLocations.AlliedTaskForces = {{110,72,0},{139,65,0}, {140,44,0}, {137,11,0}}
+reinforcementLocations.GermanBattleGroups = {{293,59,0},{299,63,0}, {324,50,0}, {347,55,0}}
+reinforcementLocations.GermanTaskForces = {{293,59,0},{299,63,0}, {324,50,0}, {347,55,0}}
+specialNumbers.baseFlightDistance = 40 -- attacks more than this many squares away from a friendly airbase will cost more, and will be scaled based on baseCost*distance/specialNumbers.baseFlightDistance (base cost is still the minimum)
+specialNumbers.italyDistanceAddition = 30 -- for the distance modification of munitions costs, 15th AF and red tails add this many squares from the 'Italy' city
 
 local airWorkaround = true -- Set to false to remove the workaround for munition creation for air units
 
@@ -1430,6 +1444,31 @@ local secondaryAttackUnitTypes = {
 	["Me262"] = { unitType=civ.getUnitType(27), munitionCreated=civ.getUnitType(103), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115, -114}, movementCostOfMunition=40, moneyCostOfMunition=50, displayText=nil, payload=true },
 	["FlakTrain"] = { unitType=civ.getUnitType(11), munitionCreated=civ.getUnitType(104), allowedTerrain={0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,  -128, -127, -126, -125, -124, -123, -122, -121, -120, -119, -118, -117, -116, -115 -114}, movementCostOfMunition=5, moneyCostOfMunition=0, displayText=nil, altMap = 2 },
 }
+
+
+function overTwoHundred.modifyMunitionCostForDistance(munitionUser,baseCost)
+    local nearestFriendlyAirbase = nil
+    local distanceToAirbase = math.huge
+    local function distance(loc1,loc2) return (math.abs(loc1.x-loc2.x)+math.abs(loc1.y-loc2.y))//2 end
+    for potentialAirbase in civ.iterateCities() do
+        if potentialAirbase.owner == munitionUser.owner and distance(potentialAirbase.location,munitionUser.location) < distanceToAirbase and potentialAirbase:hasImprovement(improvementAliases.airbase) then
+            nearestFriendlyAirbase = potentialAirbase
+            distanceToAirbase = distance(potentialAirbase.location,munitionUser.location)
+        end
+    end
+    local unit = munitionUser
+    if unit.type == unitAliases.FifteenthAF or unit.type == unitAliases.RedTails then
+        nearestFriendlyAirbase = civ.getTile(345,145,0).city
+        distanceToAirbase = distance(nearestFriendlyAirbase.location,munitionUser.location)+specialNumbers.italyDistanceAddition
+        --return maxRadius >= math.floor((math.abs(unit.location.x-345)+math.abs(unit.location.y-145))/2)
+    end
+    if unit.type == unitAliases.Il2 or unit.type == unitAliases.Yak3 then
+        nearestFriendlyAirbase = civ.getTile(406,74,0).city
+        distanceToAirbase = distance(nearestFriendlyAirbase.location,munitionUser.location)
+        --return maxRadius >= math.floor((math.abs(unit.location.x-406)+math.abs(unit.location.y-74))/2)
+    end
+    return math.max(baseCost,(distanceToAirbase*baseCost)//specialNumbers.baseFlightDistance)
+end
 
 -- Counterattack table
 -- default table of munitions for which heavy bombers will generate response
@@ -3027,6 +3066,7 @@ end
         
 local function alliedConvoyBetweenTurns(turn)
     local alliedPorts,germanPorts = countPorts()
+    germanPorts = germanPorts+state.alliedReinforcementsSent*specialNumbers.alliedReinforcementGermanPortPenalty
     local function randomTileInBox(xMin,xMax,yMin,yMax,z)
         local xVal = math.random(xMin,xMax)
         if yMin % 2 ~= xVal % 2 then
@@ -3330,7 +3370,7 @@ local function frenchOccupationScore(unit)
         if unit.moveSpent == 0 and occupationZoneScore[unit.type.id] then
             
     
-    elseif unit.owner == tribeAliases.allies then
+    elseif unit.owner == tribeAliases.Allies then
     
     
     end
@@ -3509,6 +3549,11 @@ local function checkIfInOperatingRadius(unit)
         return true
     end
     local maxRadius = physicalRange(unit.type)
+    if unit.type == unitAliases.damagedB17G then
+        maxRadius = physicalRange(unitAliases.B17G)
+    elseif unit.type == unitAliases.damagedB17F then
+        maxRadius = physicalRange(unitAliases.B17F)
+    end
     if unit.type == unitAliases.FifteenthAF or unit.type == unitAliases.RedTails then
         return maxRadius >= math.floor((math.abs(unit.location.x-345)+math.abs(unit.location.y-145))/2)
     end
@@ -6050,7 +6095,7 @@ local canNotDefendAirfield ={}
 canNotDefendAirfield[unitAliases.AlliedArmyGroup.id] = true
 canNotDefendAirfield[unitAliases.AlliedBatteredArmyGroup.id] = true
 canNotDefendAirfield[unitAliases.GermanArmyGroup.id] = true
-canNotDefendAirfield[unitAliases.AlliedBatteredArmyGroup.id] = true
+canNotDefendAirfield[unitAliases.GermanBatteredArmyGroup.id] = true
 canNotDefendAirfield[unitAliases.RedArmyGroup.id] = true
 canNotDefendAirfield[unitAliases.Convoy.id] = true
 canNotDefendAirfield[unitAliases.AlliedTaskForce.id]=true
@@ -6320,6 +6365,52 @@ local function potentialRetreatCities(unit,defeatTile)
     return closeCityList
 end
 
+function overTwoHundred.startAlliedReinforcementDepletedDefeated()
+    state.alliedReinforcementTrack[#state.alliedReinforcementTrack+1] = specialNumbers.alliedReinforcementDelay
+    state.alliedReinforcementsSent = state.alliedReinforcementsSent +1
+    local message = "To compensate for the recent defeat of our "..unitAliases.AlliedBatteredArmyGroup.name..
+        ", Allied planners will send a replacement "..unitAliases.AlliedBatteredArmyGroup.name.." unit to England."
+        .."  It is due to arrive on turn "..tostring(specialNumbers.alliedReinforcementDelay+civ.getTurn()).."."
+        .."  Due to the manpower taken out of the economy, fewer convoys will be sent across the Atlantic.  "
+        .."(This penalty is equivalent to increasing the German Military Port count by "..tostring(specialNumbers.alliedReinforcementGermanPortPenalty).." per "..unitAliases.AlliedBatteredArmyGroup.name.." sent.)"
+    text.displayNextOpportunity(tribeAliases.Allies,message,"Defense Minister","Reinforcements Sent")
+end
+
+function overTwoHundred.startAlliedReinforcementFullStrengthDefeated()
+    state.alliedReinforcementTrack[#state.alliedReinforcementTrack+1] = specialNumbers.alliedReinforcementDelay
+    state.alliedReinforcementTrack[#state.alliedReinforcementTrack+1] = specialNumbers.alliedReinforcementDelay
+    state.alliedReinforcementsSent = state.alliedReinforcementsSent +2
+    local message = "To compensate for the recent annihilation of our "..unitAliases.AlliedArmyGroup.name..
+        ", Allied planners will send two replacement "..unitAliases.AlliedBatteredArmyGroup.name.." units to England."
+        .."  They are due to arrive on turn "..tostring(specialNumbers.alliedReinforcementDelay+civ.getTurn()).."."
+        .."  Due to the manpower taken out of the economy, fewer convoys will be sent across the Atlantic.  "
+        .."(This penalty is equivalent to increasing the German Military Port count by "..tostring(specialNumbers.alliedReinforcementGermanPortPenalty).." per "..unitAliases.AlliedBatteredArmyGroup.name.." sent.)"
+    text.displayNextOpportunity(tribeAliases.Allies,message,"Defense Minister","Reinforcements Sent")
+end
+
+function overTwoHundred.startAlliedReinforcementFullStrengthDepleted()
+    state.alliedReinforcementTrack[#state.alliedReinforcementTrack+1] = specialNumbers.alliedReinforcementDelay
+    state.alliedReinforcementsSent = state.alliedReinforcementsSent +1
+    local message = "To compensate for the recent defeat of our "..unitAliases.AlliedArmyGroup.name..
+        ", Allied planners will send a replacement "..unitAliases.AlliedBatteredArmyGroup.name.." unit to England."
+        .."  It is due to arrive on turn "..tostring(specialNumbers.alliedReinforcementDelay+civ.getTurn()).."."
+        .."  Due to the manpower taken out of the economy, fewer convoys will be sent across the Atlantic.  "
+        .."(This penalty is equivalent to increasing the German Military Port count by "..tostring(specialNumbers.alliedReinforcementGermanPortPenalty).." per "..unitAliases.AlliedBatteredArmyGroup.name.." sent.)"
+    text.displayNextOpportunity(tribeAliases.Allies,message,"Defense Minister","Reinforcements Sent")
+end
+local reinforcementCityOwned = nil
+function overTwoHundred.alliedReinforcementsAfterProduction()
+    for index,value in pairs(state.alliedReinforcementTrack) do
+        if value == 1 then
+            if reinforcementCityOwned(unitAliases.AlliedBatteredArmyGroup,tribeAliases.Allies,reinforcementLocations.AlliedBattleGroups,"A "..unitAliases.AlliedBatteredArmyGroup.name.." unit has been sent from America to compensate for combat losses.") then
+                civlua.createUnit(unitAliases.AlliedBatteredArmyGroup, tribeAliases.Allies, reinforcementLocations.AlliedBattleGroups, {count=1, randomize=false, veteran=false})
+            end
+            state.alliedReinforcementTrack[index] = nil
+        else
+            state.alliedReinforcementTrack[index] = value - 1
+        end
+    end
+end
 
 local function orderlyRetreat(unit)
     local cityOptionList = potentialRetreatCities(unit,unit.location)
@@ -6358,6 +6449,9 @@ local function disorderlyEnemyBattleGroupRetreat(unit)
         escapeDialog.title = "Ground Battle Report"
         escapeDialog:addText("We've won a major battle on the ground, but most enemy troops have escaped capture.")
         escapeDialog:show()
+        if unit.owner == tribeAliases.Allies then
+            overTwoHundred.startAlliedReinforcementFullStrengthDepleted()
+        end
         if unit.type == unitAliases.GermanArmyGroup then
             local newDBG = civ.createUnit(unitAliases.GermanBatteredArmyGroup,unit.owner,closestCitySoFar.location)
             newDBG.veteran = unit.veteran
@@ -6372,6 +6466,9 @@ local function disorderlyEnemyBattleGroupRetreat(unit)
         escapeDialog.title = "Ground Battle Report"
         escapeDialog:addText("We've encirled and defeated an enemy "..unit.type.name..".")
         escapeDialog:show()
+        if unit.owner == tribeAliases.Allies then
+            overTwoHundred.startAlliedReinforcementFullStrengthDefeated()
+        end
     end
 end
         
@@ -6398,6 +6495,9 @@ local function disorderlyFriendlyBattleGroupRetreat(unit,defeatTile)
         escapeDialog.title = "Ground Battle Report"
         escapeDialog:addText("We've lost a major battle on the ground, but most of our troops have escaped capture.  They are re-grouping in "..closestCitySoFar.name..".")
         escapeDialog:show()
+        if unit.owner == tribeAliases.Allies then
+            overTwoHundred.startAlliedReinforcementFullStrengthDepleted()
+        end
         if unit.type == unitAliases.GermanArmyGroup then
             local newDBG = civ.createUnit(unitAliases.GermanBatteredArmyGroup,unit.owner,closestCitySoFar.location)
             newDBG.veteran = unit.veteran
@@ -6414,6 +6514,9 @@ local function disorderlyFriendlyBattleGroupRetreat(unit,defeatTile)
         escapeDialog.title = "Ground Battle Report"
         escapeDialog:addText("We've suffered a major defeat.  Not only has the enemy repulsed our attack, but most of our men were killed or captured.")
         escapeDialog:show()
+        if unit.owner == tribeAliases.Allies then
+            overTwoHundred.startAlliedReinforcementFullStrengthDefeated()
+        end
     end
 end
 
@@ -7045,7 +7148,6 @@ nightEscapeUnits[unitAliases.He277.id]=defaultEscapeRadiusHPFraction
 --nightEscapeUnits[unitAliases.]=defaultEscapeRadiusHPFraction
 
 
-local overTwoHundred = {}
 function overTwoHundred.escapeIntoNight(winner,loser)
     if winner.location.z == 2 and (not winner.location.city) and
         nightEscapeUnits[winner.type.id] and (not(loser.type == unitAliases.Flak or loser.type == unitAliases.LightFlak)) then
@@ -7141,10 +7243,12 @@ function overTwoHundred.useGoToHotKey(numberKey)
     local hotkeyDest =  state.hotkeys[currentUnit.owner.id][numberKey]
     if hotkeyDest then
         currentUnit.gotoTile = civ.getTile(hotkeyDest[1],hotkeyDest[2],currentUnit.location.z)
+        overTwoHundred.currentUnitGotoOrder = civ.getTile(hotkeyDest[1],hotkeyDest[2],currentUnit.location.z)
     else
         text.simple("The key "..tostring(numberKey).." is not set as a goto hotkey.","GOTO Hotkeys")
     end
 end
+
 
 -- ���������� Event Triggers: ��������������������������������������������������������������������������������������������������������������������������������������������
 
@@ -7428,6 +7532,7 @@ function overTwoHundred.goInDirection(unit,keyID)
         -- and also want to choose a tile on the map
     end
     unit.gotoTile = bestValidDestination
+    overTwoHundred.currentUnitGotoOrder = bestValidDestination
 end
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
@@ -7451,6 +7556,49 @@ civ.scen.onKeyPress(function(keyID)
         overTwoHundred.useGoToHotKey(8)
     elseif keyID == 57 --[[9]] then
         overTwoHundred.useGoToHotKey(9)
+    end
+    if keyID == 217 --[[delete]] then
+        local tile = civ.getCurrentTile() or (civ.getActiveUnit() and civ.getActiveUnit().location) or nil
+        if tile then
+            overTwoHundred.calculateCombatReady(tile)
+            return
+        end
+    end
+    if keyID == 173 --[[numpad minus]] and civ.getActiveUnit() then
+        local activeTribe = civ.getCurrentTribe()
+        local activeUnit = civ.getActiveUnit()
+        local bestAirbaseSoFar = nil
+        local bestDistanceSoFar = math.huge
+        local function cityToUnit(city,unit)
+            return math.abs(unit.location.x-city.location.x)+math.abs(unit.location.y-city.location.y)
+        end
+        for possibleAirbase in civ.iterateCities() do
+            if possibleAirbase.owner == activeTribe and possibleAirbase:hasImprovement(improvementAliases.airbase)
+                and cityToUnit(possibleAirbase,activeUnit) < bestDistanceSoFar then
+                bestDistanceSoFar = cityToUnit(possibleAirbase,activeUnit)
+                bestAirbaseSoFar = possibleAirbase
+            end
+        end
+        local function findCloserAdjacentTile(fixedTile,centerTile)
+            local offsets = {{0,2},{2,0},{0,-2},{-2,0},{1,1},{1,-1},{-1,-1},{-1,1}}
+            local currentDist = math.abs(fixedTile.x-centerTile.x)+math.abs(fixedTile.y-centerTile.y)
+            for __,offset in pairs(offsets) do
+                local adjTile = civ.getTile(centerTile.x+offset[1],centerTile.y+offset[2],centerTile.z)
+                if math.abs(adjTile.x-fixedTile.x)+math.abs(adjTile.y-fixedTile.y) < currentDist then
+                    return adjTile
+                end
+            end
+        end
+        local destination = findCloserAdjacentTile(activeUnit.location,bestAirbaseSoFar.location)
+        destination = civ.getTile(destination.x,destination.y,activeUnit.z)
+        activeUnit.gotoTile = destination
+        overTwoHundred.currentUnitGotoOrder = destination
+        return
+    end
+    if keyID == 256 and civ.getActiveUnit() then
+        if overTwoHundred.currentUnitGotoOrder then
+            civ.getActiveUnit().gotoTile = overTwoHundred.currentUnitGotoOrder
+        end
     end
     if keyID == specialNumbers.reportKeyID then
         -- activate the log report
@@ -7570,7 +7718,7 @@ civ.scen.onKeyPress(function(keyID)
 					end
 					
 					local enoughMoney = 1
-					if currentUnit.owner.money<secondAttackUnit.moneyCostOfMunition then
+					if currentUnit.owner.money<overTwoHundred.modifyMunitionCostForDistance(currentUnit,secondAttackUnit.moneyCostOfMunition) then
 						enoughMoney = 0
 					end
 					if airWorkaround then
@@ -7657,7 +7805,7 @@ civ.scen.onKeyPress(function(keyID)
 							end -- end airWorkaround modification
 						end
 						currentUnit.moveSpent = newSpent
-						currentUnit.owner.money = currentUnit.owner.money - secondAttackUnit.moneyCostOfMunition
+						currentUnit.owner.money = currentUnit.owner.money - overTwoHundred.modifyMunitionCostForDistance(currentUnit,secondAttackUnit.moneyCostOfMunition)
                         doUpkeepWarning(currentUnit.owner)
                         state.mostRecentMunitionUserID = currentUnit.id
                         if secondAttackUnit.payload then
@@ -7715,7 +7863,7 @@ civ.scen.onKeyPress(function(keyID)
 				end
 				
 			    local enoughMoney = 1
-			    if currentUnit.owner.money < artilleryUnit.moneyCostOfMunition then
+			    if currentUnit.owner.money < overTwoHundred.modifyMunitionCostForDistance(currentUnit,artilleryUnit.moneyCostOfMunition) then
 				    enoughMoney = 0
 			    end
 			    if airWorkaround then
@@ -7817,7 +7965,7 @@ civ.scen.onKeyPress(function(keyID)
 					    end -- end airWorkaround modification
 			        end
 			        currentUnit.moveSpent = newSpent
-			        currentUnit.owner.money = currentUnit.owner.money - artilleryUnit.moneyCostOfMunition
+			        currentUnit.owner.money = currentUnit.owner.money -overTwoHundred.modifyMunitionCostForDistance(currentUnit,artilleryUnit.moneyCostOfMunition) 
                     doUpkeepWarning(currentUnit.owner)
                     state.mostRecentMunitionUserID = currentUnit.id
 			        if artilleryUnit.displayText ~= nil then
@@ -7979,6 +8127,8 @@ civ.scen.onLoad(function (buffer)
     state.map1FrontStatisticsTable = state.map1FrontStatisticsTable or {}
     state.map2FrontStatisticsTable = state.map2FrontStatisticsTable or {}
     state.mostRecentMunitionUserID = state.mostRecentMunitionUserID or 0
+    state.alliedReinforcementTrack = state.alliedReinforcementTrack or {}
+    state.alliedReinforcementsSent = state.alliedReinforcementsSent or 0
 end)
 
 civ.scen.onScenarioLoaded(function ()
@@ -9117,7 +9267,7 @@ local function setUrbanDefenseValue()
 end
 
 
-local function reinforcementCityOwned(unitType,tribe,destinations,initialMessageText)
+reinforcementCityOwned = function(unitType,tribe,destinations,initialMessageText)
     local destinationCity = nil
     for index, tileTable in ipairs(destinations) do
         local tile = civ.getTile(tileTable[1],tileTable[2],tileTable[3])
@@ -9150,7 +9300,7 @@ local function reinforcementCityOwned(unitType,tribe,destinations,initialMessage
     else
         local message = civ.ui.createDialog()
         message.title = "Reinforcements Not Assembled!"
-        local messageText = "We have not assembled a new "..unitType.name.." because we don't controll any assembly cities.  We must control at least one of "
+        local messageText = "We have not assembled a new "..unitType.name.." because we don't control any assembly cities.  We must control at least one of "
         local citiesInList = #destinations
         for index, tileTable in ipairs(destinations) do
             local tile = civ.getTile(tileTable[1],tileTable[2],tileTable[3])
@@ -9169,11 +9319,6 @@ local function reinforcementCityOwned(unitType,tribe,destinations,initialMessage
     end
 end
 
-local reinforcementLocations = {}
-reinforcementLocations.AlliedBattleGroups = {{110,72,0},{139,65,0}, {140,44,0}, {137,11,0}}
-reinforcementLocations.AlliedTaskForces = {{110,72,0},{139,65,0}, {140,44,0}, {137,11,0}}
-reinforcementLocations.GermanBattleGroups = {{293,59,0},{299,63,0}, {324,50,0}, {347,55,0}}
-reinforcementLocations.GermanTaskForces = {{293,59,0},{299,63,0}, {324,50,0}, {347,55,0}}
 
 
 
@@ -9192,6 +9337,7 @@ local function afterProduction(turn,tribe)
     --civ.ui.text(func.splitlines(aptext))
     fortifyPassiveFlak()
     doScouting()
+    overTwoHundred.alliedReinforcementsAfterProduction()
     if tribe == tribeAliases.Allies then
         if turn == 1 then
         	civ.ui.text(func.splitlines(textAliases.firstTurn1))
@@ -9906,7 +10052,7 @@ local function afterProduction(turn,tribe)
         justOnce("AlliesTech93", function()
             civ.ui.text(func.splitlines(textAliases.roamAtWillA))
 			civ.ui.text(func.splitlines(textAliases.roamAtWillB))
-            text.addToArchive(tribeAliass.Allies,textAliases.roamAtWillA.."%PAGEBREAK"..textAliases.roamAtWillB,"Roam at Will","Roam at Will")
+            text.addToArchive(tribeAliases.Allies,textAliases.roamAtWillA.."%PAGEBREAK"..textAliases.roamAtWillB,"Roam at Will","Roam at Will")
         end)
     end
 	
@@ -10161,7 +10307,7 @@ civ.scen.onUnitKilled(function (loser, winner)
 		incrementCounter("AlliedScore",specialNumbers.alliedScoreIncrementKillGermanPort)
 	    elseif loser.type == unitAliases.Refinery1 or loser.type == unitAliases.Refinery2 or loser.type == unitAliases.Refinery3 then
 	    	    incrementCounter("AlliedScore",specialNumbers.alliedScoreIncrementKillRefinery)
-				tribeAliases.Germans.money = tribeAliases.Germans.money+specialNumbers.refineryKilledMoney
+				tribeAliases.Germans.money = math.min(tribeAliases.Germans.money,math.max(tribeAliases.Germans.money+specialNumbers.refineryKilledMoney,specialNumbers.moneySafeFromRefineryKill))
 	    --incrementCounter("GermanScore",-specialNumbers.alliedScoreIncrementKillRefinery)
 	    elseif loser.type == unitAliases.ACFactory1 or loser.type == unitAliases.ACFactory2 or loser.type == unitAliases.ACFactory3 then	    
 	    incrementCounter("AlliedScore",specialNumbers.alliedScoreIncrementKillFactory)
@@ -10200,6 +10346,8 @@ civ.scen.onUnitKilled(function (loser, winner)
             newUnit.order = loser.order
             newUnit.attributes = loser.attributes
             newUnit.damage = loser.damage
+        elseif loser.owner == tribeAliases.Allies then
+            overTwoHundred.startAlliedReinforcementDepletedDefeated()
         end
     end
 	
@@ -10232,6 +10380,65 @@ civ.scen.onUnitKilled(function (loser, winner)
     overTwoHundred.escapeIntoNight(winner,loser)
 	
 end)
+
+function overTwoHundred.calculateCombatReady(tile)
+    -- want to count units with full movement points, and other characteristics
+    -- need: all units, full move & full health, full move & 17+ health, vet for each
+    local unitDataTable = {}
+    local function enterData(unit,typeData)
+        typeData.count = typeData.count+1
+        if unit.veteran then
+            typeData.countVet = typeData.countVet+1
+        end
+        if unit.moveSpent > 0 then
+            return
+        end
+        typeData.fullMove=typeData.fullMove+1
+        if unit.veteran then
+            typeData.fullMoveVet = typeData.fullMoveVet+1
+        end
+        if unit.damage > 3 then
+            return
+        end
+        typeData.fullMove17 = typeData.fullMove17+1
+        if unit.veteran then
+            typeData.fullMove17Vet=typeData.fullMove17Vet+1
+        end
+        if unit.damage > 0 then
+            return
+        end
+        typeData.fullMoveHP = typeData.fullMoveHP +1
+        if unit.veteran then
+            typeData.fullMoveHPVet = typeData.fullMoveHPVet+1
+        end
+    end
+    for unit in tile.units do
+        unitDataTable[unit.type.id] = unitDataTable[unit.type.id] or {count=0,countVet=0,fullMove=0,fullMoveVet=0,
+        fullMove17=0,fullMove17Vet=0,fullMoveHP=0,fullMoveHPVet=0}
+        enterData(unit,unitDataTable[unit.type.id])
+    end
+    local dataTable = {}
+    dataTable[0] = {"Unit Type","All (Vet)","Full Move (Vet)","17+ HP (Vet)","Full HP (Vet)"}
+    local dataTableRow = 1
+    for unitTypeID =0,127 do
+        if unitDataTable[unitTypeID] then
+            local ud = unitDataTable[unitTypeID]
+            dataTable[dataTableRow]={
+            [1]=civ.getUnitType(unitTypeID).name
+            ,[2]=tostring(ud.count).." ("..tostring(ud.countVet)..")"
+            ,[3]=tostring(ud.fullMove).." ("..tostring(ud.fullMoveVet)..")"
+            ,[4]=tostring(ud.fullMove17).." ("..tostring(ud.fullMove17Vet)..")"
+            ,[5]=tostring(ud.fullMoveHP).." ("..tostring(ud.fullMoveHPVet)..")"
+        }
+            dataTableRow = dataTableRow+1
+        end
+    end
+    if dataTable[1] then
+        text.simpleTabulation(dataTable,"Combat Readiness Report")
+    end
+end
+
+
 
 ------------------------------------------------------------------------------------------------------------------------------------------------
 --local cityToDelete = nil
@@ -10334,6 +10541,7 @@ doOnActivateUnit = function(unit,source)
     gen.selectNextActiveUnit(unit,customWeightFunction)
     --unit = gen.activateBetterUnit(unit,source)
     reHomePayloadUnit(unit)
+    overTwoHundred.currentUnitGotoOrder = unit.gotoTile
     state.formationTable = {}
     state.formationFlag = false
     --[[if civ.isCity(cityToDelete) then
@@ -10359,6 +10567,7 @@ doOnActivateUnit = function(unit,source)
         unitAliases.TwentyMM.attack = 5 + gunBonus
         unitAliases.ThirtyMM.attack = 6 + gunBonus
 		unitAliases.Hispanos.attack = 7 + gunBonus
+        unitAliases.A2ARockets.attack = 5+gunBonus
     end
     -- p.g. code for making carriers only carry specific units see useCarrier table above
     -- munitions also use carrier, since otherwise the carrier is air protected
@@ -10557,6 +10766,7 @@ local function combatResolutionFunction(defaultResolutionFunction,defender,attac
          dType == unitAliases.RedArmyGroup or
          dType == unitAliases.GermanBatteredArmyGroup or dType==unitAliases.AlliedBatteredArmyGroup) then
          attacker.damage = attacker.type.hitpoints
+         defender.damage = math.min(defender.damage,specialNumbers.maxMunitionDamageToArmyGroup)
          local message = "Once a "..defender.type.name.." unit has had its hit points reduced below "..
          tostring(defender.type.hitpoints - specialNumbers.maxMunitionDamageToArmyGroup)..", it can no longer be damaged by munitions."..
          "  It must be finished off by a direct attack from another Battle Group."

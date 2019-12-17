@@ -314,7 +314,7 @@ nil,        ; Copernicus
 nil,        ; Magellan
 nil,        ; Shakespeare
 nil,        ; Da Vinci's Workshop
-Sea,        ; Bach
+nil,        ; Bach Sea
 nil,        ; Newton
 X3,         ; Smith's Trading Co.
 nil,        ; Darwin
@@ -458,13 +458,13 @@ A-26,                 nil, 1,  45.,2,  0a,7d, 2h,2f, 30,0,  0, Min, 100000000000
 B-17F,                MP, 1,  20.,12, 0a,7d, 2h,2f, 30,0,  0, Map,  100000000000000 ;66
 B-24J,                nil, 1,  30.,12, 0a,6d, 2h,2f, 25,0,  0, Mas, 100000000000000 ;67
 B-17G,                nil, 1,  22.,12, 0a,8d, 2h,2f, 20,0,  0,  MP, 100000000000000 ;68
-Battle Group,           nil, 0,   8.,0, 50a,50d, 2h,2f, 127,0,  1, nil, 000000001000100 ;69
-Depleted Battle Group,  nil, 0,   6.,0, 30a,30d, 2h,2f, 127,0,  0, nil, 000000001000100 ;70
+Battle Group,           nil, 0,   16.,0, 50a,50d, 2h,2f, 127,0,  1, nil, 000000001000100 ;69
+Depleted Battle Group,  nil, 0,   12.,0, 30a,30d, 2h,2f, 127,0,  0, nil, 000000001000100 ;70
 Egon Mayer,             nil, 1, 36.,4,  0a,14d,  2h,2f, 35,0,  3, nil, 100000000001001 ;71
 3.7-inch Flak,        nil, 0,   4.,0, 0a,7d, 3h,2f, 30,0,  1, nil, 010000000000000 ;72
 He111,                Mas, 1, 18.,10,  0a,6d, 2h,2f, 30,0,  0, Map, 000000000000000 ;73
-Battle Group,           nil, 0,   8.,0, 50a,50d, 2h,2f, 127,0,  1, nil, 000000001000100 ;74
-Depleted Battle Group,  nil, 0,   6.,0, 30a,30d, 2h,2f,  127,0,  0, nil, 000000001000100 ;75
+Battle Group,           nil, 0,   16.,0, 50a,50d, 2h,2f, 127,0,  1, nil, 000000001000100 ;74
+Depleted Battle Group,  nil, 0,   12.,0, 30a,30d, 2h,2f,  127,0,  0, nil, 000000001000100 ;75
 Sunderland,           nil, 1,  60.,4,  0a,6d, 2h,2f, 99,0,  0, Mas, 100000000001000 ;76
 Heavy Guns,        nil, 1,   1.,1,  7a,1d,  1h,3f,  1,0,  0, nil,  001000000010000 ;77
 Hermann Graf,         nil, 1, 36.,4,  0a,14d,  2h,2f, 35,0,  3, nil, 100000000001001 ;78
@@ -483,7 +483,7 @@ Refinery III,         nil, 0,   0.,0, 0a,20d, 3h,2f,  2,0,  1, nil, 000000000000
 Urban Center I,       nil, 0,   0.,0, 0a,20d, 3h,2f,  2,0,  1, nil, 000000000000000 ;91
 Urban Center II,      nil, 0,   0.,0, 0a,20d, 3h,2f,  2,0,  1, nil, 000000000000000 ;92
 Urban Center III,     nil, 0,   0.,0, 0a,20d, 3h,2f,  2,0,  1,  nil, 000000000000000 ;93
-Gun Battery,          nil, 0,   2.,0, 0a,50d, 3h,2f, 60,0, 1, nil,  000000000000000 ;94
+Gun Battery,          nil, 0,   2.,0, 0a,10d, 3h,2f, 60,0, 1, nil,  010000000000000 ;94
 Light Guns,           nil, 1,   1.,1,  4a,1d,  1h,3f,  1,0,  0, nil,  001000000010000 ;95
 Medium Guns,          nil, 1,   1.,1,  5a,1d,  1h,3f,  1,0,  0, nil,  001000000010000 ;96
 Jet Guns,           nil, 1,   1.,1,  6a,1d,  1h,3f,  1,0,  0, nil,  001000000010000 ;97
@@ -574,7 +574,7 @@ Wolf Pack,            nil, 2,  10.,0,  0a,6d,  2h,2f,  90,0,  2, Rep,  000000000
 ;
 @TERRAIN
 City,            1,2,  8,6,0,    no, 0, 1, 1,   no, 0, 1,  1,  no,   no, ; Drt 0
-Railtrack,       1,2,  1,1,0,    no, 0, 1, 1,   no, 0, 1,  1,  no,   no, ; Pln 1
+Railtrack,       1,1,  1,1,0,    no, 0, 1, 1,   no, 0, 1,  1,  no,   no, ; Pln 1
 Grassland,       1,2,  2,0,0,    yes, 3, 1, 1,  Gla, 1, 2,  1,  no,  yes, ; Grs 2
 Forest,          3,2,  1,0,0,    no, 0, 1, 1,   no, 0, 1,  1,  no,  yes, ; For 3
 Urban,           1,2,  2,2,0,    no, 0, 1, 1,   no, 0, 1,  1,  no,   no, ; Hil 4
