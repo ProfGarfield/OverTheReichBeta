@@ -78,6 +78,12 @@
 -- gen.isWaiting(unit)-->bool
 -- gen.setToWaiting(unit)-->void
 -- gen.clearWaiting(unit)-->void
+-- gen.isParadropped(unit)-->void
+-- gen.setParadropped(unit)-->void
+-- gen.clearParadropped(unit)-->void
+-- gen.isMoved(unit)-->boolean
+-- gen.setMoved(unit)-->void
+-- gen.clearMoved(unit)-->void
 --*gen.isSeeTwoSpaces(unitType)-->boolean
 --*gen.giveSeeTwoSpaces(unitType)-->void
 --*gen.removeSeeTowSpaces(unitType)-->void
@@ -542,6 +548,32 @@ end
 -- gen.clearWaiting(unit)-->void
 function gen.clearWaiting(unit)
     unit.attributes = unit.attributes & ~0x4000
+end
+-- gen.isParadropped(unit)-->boolean
+function gen.isParadropped(unit)
+    return isBit1(unit.attributes,5)
+end
+-- gen.setParadropped(unit)-->void
+function gen.setParadropped(unit)
+    unit.attributes = setBit1(unit.attributes,5)
+end
+-- gen.clearParadropped(unit)-->void
+function gen.clearParadropped(unit)
+    unit.attributes = setBit0(unit.attributes,5)
+end
+-- gen.isMoved(unit)-->boolean
+-- game sets this flag when a unit moves (even if no move spent)
+-- unit won't heal on next turn if this flag is set
+function gen.isMoved(unit)
+    return isBit1(unit.attributes,7)
+end
+-- gen.setMoved(unit)-->void
+function gen.setMoved(unit)
+    unit.attributes = setBit1(unit.attributes,7)
+end
+-- gen.clearMoved(unit)-->void
+function gen.clearMoved(unit)
+    unit.attributes = setBit0(unit.attributes,7)
 end
 --
 -- gen.isSeeTwoSpaces(unitType)-->boolean

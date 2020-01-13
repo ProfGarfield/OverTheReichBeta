@@ -330,12 +330,18 @@ local function moveToTile(formationTable, fTableKey, keyID)
 			-- air units never enter cities in formation
 			formationTable[fTableKey] = nil
 			return
-		elseif movePointsLeft(unit) <= 1 then
-			-- air units must have at least 2 move points to stay in formation
+		elseif movePointsLeft(unit) <= 1 and destination.z == unit.location.z then
+			-- air units must have at least 2 move points to stay in formation if the destination is
+            -- on the same map as the unit is currently on (if they have one move and are changing maps,
+            -- they still stay in formation
             if movePointsLeft(unit) == 1 then
                 -- air unit has a movement point left, so we'll give it the goto order to the destination
                 unit.gotoTile = destination
             end
+			formationTable[fTableKey] = nil
+			return
+        elseif movePointsLeft(unit) <= 0 then
+            -- if the unit is somehow still in formation with zero moves remaining, drop it out of the formation
 			formationTable[fTableKey] = nil
 			return
 		else
